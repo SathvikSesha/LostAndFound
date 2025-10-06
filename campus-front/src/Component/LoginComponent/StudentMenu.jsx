@@ -96,151 +96,68 @@
 
 // export default StudentMenu;
 
-import React, { useState } from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import React from "react";
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {
   FaBoxOpen,
   FaSearch,
   FaPlusCircle,
   FaSignOutAlt,
-  FaUser,
-  FaFileAlt,
-  FaMapMarkerAlt,
-  FaBell,
-  FaCog,
-  FaBars,
-  FaTimes,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import "../../Dashboard.css";
 
 const StudentMenu = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const toggleDropdown = (title) =>
-    setOpenDropdown(openDropdown === title ? null : title);
-
-  // MENU ITEMS MAPPING
-  const menuItems = [
-    {
-      title: "Profile",
-      icon: <FaUser className="me-2" />,
-      items: [{ name: "Personal Info", href: "/Personal", icon: <FaUser /> }],
-    },
-    {
-      title: "Items",
-      icon: <FaBoxOpen className="me-2" />,
-      items: [
-        {
-          name: "Lost Item Registration",
-          href: "/LostSubmit",
-          icon: <FaMapMarkerAlt />,
-        },
-        {
-          name: "Found Item Submission",
-          href: "/FoundSubmit",
-          icon: <FaMapMarkerAlt />,
-        },
-        { name: "My Lost Items", href: "/MyLostItems", icon: <FaFileAlt /> },
-        { name: "My Found Items", href: "/MyFoundItems", icon: <FaFileAlt /> },
-      ],
-    },
-    {
-      title: "Reports",
-      icon: <FaFileAlt className="me-2" />,
-      items: [
-        { name: "Lost Item List", href: "/LostReport", icon: <FaFileAlt /> },
-        { name: "Found Item List", href: "/FoundReport", icon: <FaFileAlt /> },
-      ],
-    },
-  ];
-
   return (
     <div className="dashboard-container">
-      {/* NAVBAR */}
+      {/* Navbar - aligned with AdminMenu UI */}
       <Navbar expand="lg" className="glass-navbar px-4 py-2">
-        <Navbar.Brand className="portal-title d-flex align-items-center">
+        <Navbar.Brand className="portal-title">
           <FaBoxOpen className="me-2" /> Lost & Found Student Portal
         </Navbar.Brand>
+        <Navbar.Toggle aria-controls="student-navbar" />
+        <Navbar.Collapse id="student-navbar">
+          <Nav className="ms-auto">
+            <NavDropdown title="Profile" className="nav-item">
+              <NavDropdown.Item as={Link} to="/Personal">
+                Personal Info
+              </NavDropdown.Item>
+            </NavDropdown>
 
-        {/* MOBILE TOGGLE */}
-        <button
-          className="menu-toggle d-lg-none border-0 bg-transparent text-white fs-4"
-          onClick={toggleMenu}
-        >
-          {isMenuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+            <NavDropdown title="Lost Items" className="nav-item">
+              <NavDropdown.Item as={Link} to="/LostSubmit">
+                Lost Item Registration
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/MyLostItems">
+                My Lost Items
+              </NavDropdown.Item>
+            </NavDropdown>
 
-        <Nav className="ms-auto d-none d-lg-flex align-items-center">
-          {menuItems.map((menu, index) => (
-            <div key={index} className="position-relative me-3">
-              <button
-                className="btn btn-link text-white text-decoration-none dropdown-toggle"
-                onClick={() => toggleDropdown(menu.title)}
-              >
-                {menu.icon}
-                {menu.title}
-              </button>
+            <NavDropdown title="Found Items" className="nav-item">
+              <NavDropdown.Item as={Link} to="/FoundSubmit">
+                Found Item Submission
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/MyFoundItems">
+                My Found Items
+              </NavDropdown.Item>
+            </NavDropdown>
 
-              {openDropdown === menu.title && (
-                <div className="dropdown-menu show fade-in glass-dropdown">
-                  {menu.items.map((item, i) => (
-                    <Link
-                      key={i}
-                      to={item.href}
-                      className="dropdown-item d-flex align-items-center"
-                    >
-                      <span className="me-2">{item.icon}</span> {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+            <NavDropdown title="Reports" className="nav-item">
+              <NavDropdown.Item as={Link} to="/FoundReport">
+                Found Item List
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/LostReport">
+                Lost Item List
+              </NavDropdown.Item>
+            </NavDropdown>
 
-          <FaBell className="text-white me-3 fs-5" />
-          <FaCog className="text-white me-3 fs-5" />
-
-          <Link to="/" className="logout-btn d-flex align-items-center">
-            <FaSignOutAlt className="me-1" /> Logout
-          </Link>
-        </Nav>
+            <Nav.Link as={Link} to="/" className="logout-btn">
+              <FaSignOutAlt className="me-1" /> Logout
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
-
-      {/* MOBILE MENU */}
-      {isMenuOpen && (
-        <div className="mobile-menu glass-dropdown mt-2 p-3 rounded">
-          {menuItems.map((menu, idx) => (
-            <div key={idx} className="mb-3">
-              <button
-                onClick={() => toggleDropdown(menu.title)}
-                className="w-100 text-start btn btn-outline-light mb-1"
-              >
-                {menu.icon} {menu.title}
-              </button>
-              {openDropdown === menu.title && (
-                <div className="ms-3">
-                  {menu.items.map((item, i) => (
-                    <Link
-                      key={i}
-                      to={item.href}
-                      className="d-block text-white-50 mb-1"
-                    >
-                      {item.icon} {item.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-          <Link to="/" className="btn btn-danger w-100">
-            <FaSignOutAlt className="me-2" /> Logout
-          </Link>
-        </div>
-      )}
 
       {/* DASHBOARD CARDS */}
       <div className="cards-grid">
