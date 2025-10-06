@@ -132,173 +132,154 @@ const LostItemSubmit = () => {
     }
   };
 
-  const inputStyles =
-    "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent";
-  const labelStyles = "block text-sm font-medium text-gray-700 mb-1";
-  const errorStyles = "text-red-500 text-xs mt-1";
+  
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-4xl bg-white rounded-xl shadow-lg p-8 space-y-6">
-        <div className="flex flex-col items-center">
-          <div className="flex items-center justify-center w-16 h-16 mb-4 bg-indigo-100 rounded-full">
-            <FaBoxOpen size={35} className="text-indigo-600" />
-          </div>
-          <h2 className="text-3xl font-bold text-gray-800 text-center">
-            Lost Item Submission
-          </h2>
-          <p className="text-gray-500 mt-2">Report an item you have lost.</p>
-        </div>
+    <div className="bg-light min-vh-100 d-flex align-items-center">
+      <div className="container py-4">
+        <div className="card shadow-lg mx-auto" style={{ maxWidth: "900px" }}>
+          <div className="card-body">
+            <div className="d-flex flex-column align-items-center">
+              <div
+                className="d-flex align-items-center justify-content-center rounded-circle bg-primary-subtle mb-4"
+                style={{ width: "64px", height: "64px" }}
+              >
+                <FaBoxOpen size={35} className="text-primary" />
+              </div>
+              <h2 className="h2 fw-bold text-dark text-center">Lost Item Submission</h2>
+              <p className="text-muted mt-2">Report an item you have lost.</p>
+            </div>
 
-        <form onSubmit={handleValidation}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-            <div className="space-y-6">
-              <div>
-                <label className={labelStyles}>Generated Item ID</label>
-                <input
-                  className={`${inputStyles} bg-gray-100 cursor-not-allowed`}
-                  value={newId ?? ""}
-                  readOnly
-                />
+            <form onSubmit={handleValidation}>
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <div className="mb-3">
+                    <label className="form-label">Generated Item ID</label>
+                    <input className="form-control bg-light" value={newId ?? ""} readOnly />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">User Name</label>
+                    <input className="form-control bg-light" value={item.username ?? ""} readOnly />
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label">User Email</label>
+                    <input className="form-control bg-light" value={item.userEmail ?? ""} readOnly />
+                  </div>
+                  <div className="mb-3">
+                  <label htmlFor="lostDate" className="form-label">Select Lost Date *</label>
+                    <input
+                      id="lostDate"
+                      type="date"
+                      className={`form-control ${errors.lostDate ? "is-invalid" : ""}`}
+                      value={ldate}
+                      onChange={(e) => setLdate(e.target.value)}
+                    />
+                    {errors.lostDate && (
+                      <div className="invalid-feedback">{errors.lostDate}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="entryDate" className="form-label">Select Entry Date *</label>
+                    <input
+                      id="entryDate"
+                      type="date"
+                      className={`form-control ${errors.entryDate ? "is-invalid" : ""}`}
+                      value={edate}
+                      onChange={(e) => setEdate(e.target.value)}
+                    />
+                    {errors.entryDate && (
+                      <div className="invalid-feedback">{errors.entryDate}</div>
+                    )}
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="mb-3">
+                    <label htmlFor="itemName" className="form-label">Item Name *</label>
+                    <input
+                      id="itemName"
+                      name="itemName"
+                      className={`form-control ${errors.itemName ? "is-invalid" : ""}`}
+                      value={item.itemName ?? ""}
+                      onChange={onChangeHandler}
+                    />
+                    {errors.itemName && (
+                      <div className="invalid-feedback">{errors.itemName}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="category" className="form-label">Category *</label>
+                    <input
+                      id="category"
+                      name="category"
+                      className={`form-control ${errors.category ? "is-invalid" : ""}`}
+                      value={item.category ?? ""}
+                      onChange={onChangeHandler}
+                    />
+                    {errors.category && (
+                      <div className="invalid-feedback">{errors.category}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="color" className="form-label">Color *</label>
+                    <input
+                      id="color"
+                      name="color"
+                      className={`form-control ${errors.color ? "is-invalid" : ""}`}
+                      value={item.color ?? ""}
+                      onChange={onChangeHandler}
+                    />
+                    {errors.color && (
+                      <div className="invalid-feedback">{errors.color}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="brand" className="form-label">Brand *</label>
+                    <input
+                      id="brand"
+                      name="brand"
+                      className={`form-control ${errors.brand ? "is-invalid" : ""}`}
+                      value={item.brand ?? ""}
+                      onChange={onChangeHandler}
+                    />
+                    {errors.brand && (
+                      <div className="invalid-feedback">{errors.brand}</div>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="location" className="form-label">Location Where it was Lost *</label>
+                    <input
+                      id="location"
+                      name="location"
+                      className={`form-control ${errors.location ? "is-invalid" : ""}`}
+                      value={item.location ?? ""}
+                      onChange={onChangeHandler}
+                    />
+                    {errors.location && (
+                      <div className="invalid-feedback">{errors.location}</div>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div>
-                <label className={labelStyles}>User Name</label>
-                <input
-                  className={`${inputStyles} bg-gray-100 cursor-not-allowed`}
-                  value={item.username ?? ""}
-                  readOnly
-                />
+
+              <div className="d-flex flex-column flex-md-row gap-3 mt-4">
+                <button
+                  type="button"
+                  onClick={returnBack}
+                  className="btn btn-secondary w-100"
+                >
+                  Return
+                </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary w-100"
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Lost Item"}
+                </button>
               </div>
-              <div>
-                <label className={labelStyles}>User Email</label>
-                <input
-                  className={`${inputStyles} bg-gray-100 cursor-not-allowed`}
-                  value={item.userEmail ?? ""}
-                  readOnly
-                />
-              </div>
-              <div>
-                <label htmlFor="lostDate" className={labelStyles}>
-                  Select Lost Date *
-                </label>
-                <input
-                  id="lostDate"
-                  type="date"
-                  className={inputStyles}
-                  value={ldate}
-                  onChange={(e) => setLdate(e.target.value)}
-                />
-                {errors.lostDate && (
-                  <p className={errorStyles}>{errors.lostDate}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="entryDate" className={labelStyles}>
-                  Select Entry Date *
-                </label>
-                <input
-                  id="entryDate"
-                  type="date"
-                  className={inputStyles}
-                  value={edate}
-                  onChange={(e) => setEdate(e.target.value)}
-                />
-                {errors.entryDate && (
-                  <p className={errorStyles}>{errors.entryDate}</p>
-                )}
-              </div>
-            </div>
-            <div className="space-y-6">
-              <div>
-                <label htmlFor="itemName" className={labelStyles}>
-                  Item Name *
-                </label>
-                <input
-                  id="itemName"
-                  name="itemName"
-                  className={inputStyles}
-                  value={item.itemName ?? ""}
-                  onChange={onChangeHandler}
-                />
-                {errors.itemName && (
-                  <p className={errorStyles}>{errors.itemName}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="category" className={labelStyles}>
-                  Category *
-                </label>
-                <input
-                  id="category"
-                  name="category"
-                  className={inputStyles}
-                  value={item.category ?? ""}
-                  onChange={onChangeHandler}
-                />
-                {errors.category && (
-                  <p className={errorStyles}>{errors.category}</p>
-                )}
-              </div>
-              <div>
-                <label htmlFor="color" className={labelStyles}>
-                  Color *
-                </label>
-                <input
-                  id="color"
-                  name="color"
-                  className={inputStyles}
-                  value={item.color ?? ""}
-                  onChange={onChangeHandler}
-                />
-                {errors.color && <p className={errorStyles}>{errors.color}</p>}
-              </div>
-              <div>
-                <label htmlFor="brand" className={labelStyles}>
-                  Brand *
-                </label>
-                <input
-                  id="brand"
-                  name="brand"
-                  className={inputStyles}
-                  value={item.brand ?? ""}
-                  onChange={onChangeHandler}
-                />
-                {errors.brand && <p className={errorStyles}>{errors.brand}</p>}
-              </div>
-              <div>
-                <label htmlFor="location" className={labelStyles}>
-                  Location Where it was Lost *
-                </label>
-                <input
-                  id="location"
-                  name="location"
-                  className={inputStyles}
-                  value={item.location ?? ""}
-                  onChange={onChangeHandler}
-                />
-                {errors.location && (
-                  <p className={errorStyles}>{errors.location}</p>
-                )}
-              </div>
-            </div>
+            </form>
           </div>
-          <div className="flex flex-col md:flex-row gap-4 mt-8">
-            <button
-              type="button"
-              onClick={returnBack}
-              className="w-full bg-gray-500 text-white font-bold py-3 px-4 rounded-md hover:bg-gray-600 transition"
-            >
-              Return
-            </button>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-md hover:bg-indigo-700 disabled:opacity-50 transition"
-            >
-              {isSubmitting ? "Submitting..." : "Submit Lost Item"}
-            </button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   );
