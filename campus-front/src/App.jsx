@@ -9,7 +9,7 @@ import FoundItemSubmit from "./Component/ItemComponent/FoundItemSubmit";
 import LostItemReport from "./Component/ItemComponent/LostItemReport";
 import FoundItemReport from "./Component/ItemComponent/FoundItemReport";
 import SingleStudentDetails from "./Component/LoginComponent/SingleStudentDetails";
-import StudentList from "./Component/LoginComponent/SingleStudentDetails";
+import StudentList from "./Component/LoginComponent/StudentList";
 import FoundItemRedirected from "./Component/ItemComponent/FoundItemRedirected";
 import Personal from "./Component/LoginComponent/Personal";
 import DeleteStudent from "./Component/LoginComponent/DeleteStudent";
