@@ -132,45 +132,64 @@ const LostItemSubmit = () => {
     }
   };
 
-  
-
   return (
-    <div className="bg-light min-vh-100 d-flex align-items-center">
+    <div className="lf-bg min-vh-100 d-flex align-items-start pt-5">
       <div className="container py-4">
-        <div className="card shadow-lg mx-auto" style={{ maxWidth: "900px" }}>
+        <div
+          className="card lf-card shadow-lg mx-auto"
+          style={{ maxWidth: "1040px" }}
+        >
           <div className="card-body">
             <div className="d-flex flex-column align-items-center">
               <div
-                className="d-flex align-items-center justify-content-center rounded-circle bg-primary-subtle mb-4"
+                className="d-flex align-items-center justify-content-center rounded-circle bg-primary-subtle mb-4 lf-icon-ring"
                 style={{ width: "64px", height: "64px" }}
               >
                 <FaBoxOpen size={35} className="text-primary" />
               </div>
-              <h2 className="h2 fw-bold text-dark text-center">Lost Item Submission</h2>
+              <h2 className="h2 fw-bold text-dark text-center lf-title">
+                Lost Item Submission
+              </h2>
               <p className="text-muted mt-2">Report an item you have lost.</p>
             </div>
 
-            <form onSubmit={handleValidation}>
+            <form onSubmit={handleValidation} className="lf-form">
               <div className="row g-4">
                 <div className="col-md-6">
                   <div className="mb-3">
                     <label className="form-label">Generated Item ID</label>
-                    <input className="form-control bg-light" value={newId ?? ""} readOnly />
+                    <input
+                      className="form-control bg-light"
+                      value={newId ?? ""}
+                      readOnly
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">User Name</label>
-                    <input className="form-control bg-light" value={item.username ?? ""} readOnly />
+                    <input
+                      className="form-control bg-light"
+                      value={item.username ?? ""}
+                      readOnly
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">User Email</label>
-                    <input className="form-control bg-light" value={item.userEmail ?? ""} readOnly />
+                    <input
+                      className="form-control bg-light"
+                      value={item.userEmail ?? ""}
+                      readOnly
+                    />
                   </div>
                   <div className="mb-3">
-                  <label htmlFor="lostDate" className="form-label">Select Lost Date *</label>
+                    <label htmlFor="lostDate" className="form-label">
+                      Select Lost Date *
+                    </label>
                     <input
                       id="lostDate"
                       type="date"
-                      className={`form-control ${errors.lostDate ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.lostDate ? "is-invalid" : ""
+                      }`}
                       value={ldate}
                       onChange={(e) => setLdate(e.target.value)}
                     />
@@ -179,11 +198,15 @@ const LostItemSubmit = () => {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="entryDate" className="form-label">Select Entry Date *</label>
+                    <label htmlFor="entryDate" className="form-label">
+                      Select Entry Date *
+                    </label>
                     <input
                       id="entryDate"
                       type="date"
-                      className={`form-control ${errors.entryDate ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.entryDate ? "is-invalid" : ""
+                      }`}
                       value={edate}
                       onChange={(e) => setEdate(e.target.value)}
                     />
@@ -194,11 +217,15 @@ const LostItemSubmit = () => {
                 </div>
                 <div className="col-md-6">
                   <div className="mb-3">
-                    <label htmlFor="itemName" className="form-label">Item Name *</label>
+                    <label htmlFor="itemName" className="form-label">
+                      Item Name *
+                    </label>
                     <input
                       id="itemName"
                       name="itemName"
-                      className={`form-control ${errors.itemName ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.itemName ? "is-invalid" : ""
+                      }`}
                       value={item.itemName ?? ""}
                       onChange={onChangeHandler}
                     />
@@ -207,11 +234,15 @@ const LostItemSubmit = () => {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="category" className="form-label">Category *</label>
+                    <label htmlFor="category" className="form-label">
+                      Category *
+                    </label>
                     <input
                       id="category"
                       name="category"
-                      className={`form-control ${errors.category ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.category ? "is-invalid" : ""
+                      }`}
                       value={item.category ?? ""}
                       onChange={onChangeHandler}
                     />
@@ -220,11 +251,15 @@ const LostItemSubmit = () => {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="color" className="form-label">Color *</label>
+                    <label htmlFor="color" className="form-label">
+                      Color *
+                    </label>
                     <input
                       id="color"
                       name="color"
-                      className={`form-control ${errors.color ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.color ? "is-invalid" : ""
+                      }`}
                       value={item.color ?? ""}
                       onChange={onChangeHandler}
                     />
@@ -233,11 +268,15 @@ const LostItemSubmit = () => {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="brand" className="form-label">Brand *</label>
+                    <label htmlFor="brand" className="form-label">
+                      Brand *
+                    </label>
                     <input
                       id="brand"
                       name="brand"
-                      className={`form-control ${errors.brand ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.brand ? "is-invalid" : ""
+                      }`}
                       value={item.brand ?? ""}
                       onChange={onChangeHandler}
                     />
@@ -246,11 +285,15 @@ const LostItemSubmit = () => {
                     )}
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="location" className="form-label">Location Where it was Lost *</label>
+                    <label htmlFor="location" className="form-label">
+                      Location Where it was Lost *
+                    </label>
                     <input
                       id="location"
                       name="location"
-                      className={`form-control ${errors.location ? "is-invalid" : ""}`}
+                      className={`form-control ${
+                        errors.location ? "is-invalid" : ""
+                      }`}
                       value={item.location ?? ""}
                       onChange={onChangeHandler}
                     />
@@ -265,14 +308,14 @@ const LostItemSubmit = () => {
                 <button
                   type="button"
                   onClick={returnBack}
-                  className="btn btn-secondary w-100"
+                  className="btn btn-secondary w-100 lf-btn"
                 >
                   Return
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn btn-primary w-100"
+                  className="btn btn-primary w-100 lf-btn"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Lost Item"}
                 </button>
