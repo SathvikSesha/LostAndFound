@@ -12,6 +12,7 @@ import SingleStudentDetails from "./Component/LoginComponent/SingleStudentDetail
 import StudentList from "./Component/LoginComponent/SingleStudentDetails";
 import FoundItemRedirected from "./Component/ItemComponent/FoundItemRedirected";
 import Personal from "./Component/LoginComponent/Personal";
+import DeleteStudent from "./Component/LoginComponent/DeleteStudent";
 import "./App.css";
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
               element={<FoundItemRedirected />}
             />
             <Route path="/Personal" element={<Personal />} />
+            <Route path="/DeleteStudent" element={<DeleteStudent />} />
           </Routes>
         </BrowserRouter>
       </div>
