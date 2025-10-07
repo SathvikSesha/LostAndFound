@@ -21,13 +21,12 @@ const AdminMenu = () => {
         <Nav className="ms-auto">
           <NavDropdown title="Students" className="nav-item">
             <NavDropdown.Item href="/Students">Student List</NavDropdown.Item>
-            <NavDropdown.Item>Remove Student</NavDropdown.Item>
+            <NavDropdown.Item href="/DeleteStudent">
+              Remove Student
+            </NavDropdown.Item>
           </NavDropdown>
 
           <NavDropdown title="Lost Items" className="nav-item">
-            <NavDropdown.Item href="/lostSubmit">
-              Lost Item Registration
-            </NavDropdown.Item>
             <NavDropdown.Item href="/lostReport">
               Lost Item List
             </NavDropdown.Item>
@@ -35,9 +34,6 @@ const AdminMenu = () => {
           </NavDropdown>
 
           <NavDropdown title="Found Items" className="nav-item">
-            <NavDropdown.Item href="/foundsubmit">
-              Found Item Submission
-            </NavDropdown.Item>
             <NavDropdown.Item href="/foundReport">
               Found Item List
             </NavDropdown.Item>
