@@ -1,0 +1,94 @@
+/* Page background */
+.lost-item-page {
+  background-color: #ffffff;
+  min-height: 80vh !important;
+}
+
+/* Card container */
+.lost-item-card {
+  max-width: 700px;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: all 0.25s ease-in-out;
+}
+
+.lost-item-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Table styling */
+.table {
+  border-radius: 8px;
+  font-size: 0.88rem;
+}
+
+.table thead th {
+  background-color: #0d6efd !important;
+  color: #fff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  font-weight: 600;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8faff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #eef6ff !important;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Buttons */
+.btn-success {
+  background-color: #28a745;
+  border: none;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  transition: 0.2s ease-in-out;
+  width: 300px !important;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transition: 0.2s ease-in-out;
+  transform: scale(1.01);
+}
+
+.btn-sm {
+  font-size: 0.85rem;
+  padding: 4px 10px !important;
+  border-radius: 6px;
+}
+
+/* Make form buttons more compact */
+.lf-btn-sm {
+  width: auto !important;
+  min-width: 120px !important;
+  padding: 6px 16px !important;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.lf-btn-sm:hover {
+  opacity: 0.9;
+}
+
+/* Align buttons neatly */
+.lf-btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1.5rem;
+}

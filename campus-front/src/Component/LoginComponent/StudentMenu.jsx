@@ -129,7 +129,7 @@ const StudentMenu = () => {
               <NavDropdown.Item as={Link} to="/LostSubmit">
                 Lost Item Registration
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/MyLostItems">
+              <NavDropdown.Item as={Link} to="/LostReport">
                 My Lost Items
               </NavDropdown.Item>
             </NavDropdown>
@@ -138,7 +138,7 @@ const StudentMenu = () => {
               <NavDropdown.Item as={Link} to="/FoundSubmit">
                 Found Item Submission
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/MyFoundItems">
+              <NavDropdown.Item as={Link} to="/FoundReport">
                 My Found Items
               </NavDropdown.Item>
             </NavDropdown>

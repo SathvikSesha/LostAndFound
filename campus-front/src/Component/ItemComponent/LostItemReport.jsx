@@ -1,3 +1,170 @@
+// import React, { useState, useEffect } from "react";
+// import { useNavigate } from "react-router-dom";
+// import {
+//   notFoundItemList,
+//   lostItemListByUser,
+// } from "../../Services/LostFoundItemService";
+// import { getUserDetails } from "../../Services/LoginService";
+// import { FaSearch, FaRegSadTear } from "react-icons/fa";
+
+// const LostItemReport = () => {
+//   const [lostItems, setLostItems] = useState([]);
+//   const [currentUser, setCurrentUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     getUserDetails()
+//       .then((response) => setCurrentUser(response.data))
+//       .catch((error) => {
+//         console.error("Error fetching user details:", error);
+//         setLoading(false);
+//       });
+//   }, []);
+
+//   useEffect(() => {
+//     if (currentUser) {
+//       if (currentUser.role === "Admin") {
+//         notFoundItemList()
+//           .then((response) => setLostItems(response.data))
+//           .catch((error) =>
+//             console.error("Error fetching all lost items:", error)
+//           )
+//           .finally(() => setLoading(false));
+//       } else if (currentUser.role === "Student") {
+//         lostItemListByUser()
+//           .then((response) => setLostItems(response.data))
+//           .catch((error) =>
+//             console.error("Error fetching user's lost items:", error)
+//           )
+//           .finally(() => setLoading(false));
+//       }
+//     }
+//   }, [currentUser]);
+
+//   const handleFoundSubmission = (itemId) => {
+//     // Navigate to redirected found item component
+//     navigate(`/Found-Redirected/${itemId}`);
+//   };
+
+//   const returnBack = () => {
+//     if (currentUser?.role === "Admin") {
+//       navigate("/AdminMenu");
+//     } else {
+//       navigate("/StudentMenu");
+//     }
+//   };
+
+//   if (loading) {
+//     return <div className="text-center text-lg mt-10">Loading items...</div>;
+//   }
+
+//   return (
+//     <div className="bg-gray-100 min-h-screen p-4 md:p-8">
+//       <div className="mx-auto bg-white rounded-xl shadow-lg p-6">
+//         <div className="text-center mb-8">
+//           <FaSearch size={40} className="text-indigo-600 mx-auto mb-3" />
+//           <h1 className="text-3xl font-bold text-gray-800">Lost Item Report</h1>
+//           <p className="text-gray-500 mt-2">
+//             Items that are currently reported as lost.
+//           </p>
+//         </div>
+
+//         {lostItems.length === 0 ? (
+//           <div className="text-center py-10">
+//             <FaRegSadTear size={50} className="mx-auto text-gray-400 mb-4" />
+//             <h2 className="text-xl font-semibold text-gray-700">
+//               No Lost Items Found
+//             </h2>
+//             <p className="text-gray-500 mt-2">
+//               There are currently no items reported as lost.
+//             </p>
+//           </div>
+//         ) : (
+//           <div className="overflow-x-auto">
+//             <table className="min-w-full divide-y divide-gray-200">
+//               <thead className="bg-gray-100">
+//                 <tr>
+//                   {[
+//                     "Item ID",
+//                     "Item Name",
+//                     "Category",
+//                     "Brand",
+//                     "Color",
+//                     "Location Lost",
+//                     "Lost Date",
+//                     "Reported By",
+//                     "Action",
+//                   ].map((header) => (
+//                     <th
+//                       key={header}
+//                       scope="col"
+//                       className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
+//                     >
+//                       {header}
+//                     </th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody className="bg-white divide-y divide-gray-200">
+//                 {lostItems.map((item) => (
+//                   <tr key={item.itemId} className="hover:bg-gray-50">
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+//                       {item.itemId}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+//                       {item.itemName}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                       {item.category}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                       {item.brand}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                       {item.color}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                       {item.location}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                       {item.lostDate}
+//                     </td>
+//                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+//                       {item.username}
+//                     </td>
+//                     {currentUser?.role === "Student" && (
+//                       <td className="px-6 py-4 text-sm font-medium">
+//                         <button
+//                           onClick={() => handleFoundSubmission(item.itemId)}
+//                           className="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600"
+//                         >
+//                           Mark as Found
+//                         </button>
+//                       </td>
+//                     )}
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+//         )}
+
+//         <div className="flex justify-end mt-6">
+//           <button
+//             onClick={returnBack}
+//             className="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+//           >
+//             Return
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default LostItemReport;
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -6,6 +173,7 @@ import {
 } from "../../Services/LostFoundItemService";
 import { getUserDetails } from "../../Services/LoginService";
 import { FaSearch, FaRegSadTear } from "react-icons/fa";
+import "../../LostItemReport.css";
 
 const LostItemReport = () => {
   const [lostItems, setLostItems] = useState([]);
@@ -24,120 +192,81 @@ const LostItemReport = () => {
 
   useEffect(() => {
     if (currentUser) {
-      if (currentUser.role === "Admin") {
-        notFoundItemList()
-          .then((response) => setLostItems(response.data))
-          .catch((error) =>
-            console.error("Error fetching all lost items:", error)
-          )
-          .finally(() => setLoading(false));
-      } else if (currentUser.role === "Student") {
-        lostItemListByUser()
-          .then((response) => setLostItems(response.data))
-          .catch((error) =>
-            console.error("Error fetching user's lost items:", error)
-          )
-          .finally(() => setLoading(false));
-      }
+      const fetchItems =
+        currentUser.role === "Admin" ? notFoundItemList : lostItemListByUser;
+      fetchItems()
+        .then((response) => setLostItems(response.data))
+        .catch((error) => console.error("Error fetching lost items:", error))
+        .finally(() => setLoading(false));
     }
   }, [currentUser]);
 
   const handleFoundSubmission = (itemId) => {
-    // Navigate to redirected found item component
     navigate(`/Found-Redirected/${itemId}`);
   };
 
   const returnBack = () => {
-    if (currentUser?.role === "Admin") {
-      navigate("/AdminMenu");
-    } else {
-      navigate("/StudentMenu");
-    }
+    navigate(currentUser?.role === "Admin" ? "/AdminMenu" : "/StudentMenu");
   };
 
-  if (loading) {
-    return <div className="text-center text-lg mt-10">Loading items...</div>;
-  }
+  if (loading)
+    return (
+      <div className="text-center mt-5 fs-6 text-muted">Loading items...</div>
+    );
 
   return (
-    <div className="bg-gray-100 min-h-screen p-4 md:p-8">
-      <div className="mx-auto bg-white rounded-xl shadow-lg p-6">
-        <div className="text-center mb-8">
-          <FaSearch size={40} className="text-indigo-600 mx-auto mb-3" />
-          <h1 className="text-3xl font-bold text-gray-800">Lost Item Report</h1>
-          <p className="text-gray-500 mt-2">
-            Items that are currently reported as lost.
+    <div className="lost-item-page d-flex justify-content-center align-items-start py-5">
+      <div className="card shadow-sm p-4 lost-item-card w-75">
+        <div className="text-center mb-4">
+          <FaSearch size={40} className="text-primary mb-2" />
+          <h4 className="fw-semibold text-primary">Lost Item Report</h4>
+          <p className="text-secondary small">
+            Items currently reported as lost.
           </p>
         </div>
 
         {lostItems.length === 0 ? (
-          <div className="text-center py-10">
-            <FaRegSadTear size={50} className="mx-auto text-gray-400 mb-4" />
-            <h2 className="text-xl font-semibold text-gray-700">
+          <div className="text-center py-5">
+            <FaRegSadTear size={50} className="text-muted mb-3" />
+            <h6 className="fw-semibold text-secondary mb-2">
               No Lost Items Found
-            </h2>
-            <p className="text-gray-500 mt-2">
-              There are currently no items reported as lost.
+            </h6>
+            <p className="text-muted small">
+              There are currently no lost item reports.
             </p>
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-100">
+          <div className="table-responsive">
+            <table className="table table-sm table-striped table-hover align-middle text-center">
+              <thead className="table-primary small">
                 <tr>
-                  {[
-                    "Item ID",
-                    "Item Name",
-                    "Category",
-                    "Brand",
-                    "Color",
-                    "Location Lost",
-                    "Lost Date",
-                    "Reported By",
-                    "Action",
-                  ].map((header) => (
-                    <th
-                      key={header}
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider"
-                    >
-                      {header}
-                    </th>
-                  ))}
+                  <th>Item ID</th>
+                  <th>Item Name</th>
+                  <th>Category</th>
+                  <th>Brand</th>
+                  <th>Color</th>
+                  <th>Location Lost</th>
+                  <th>Lost Date</th>
+                  <th>Reported By</th>
+                  {currentUser?.role === "Student" && <th>Action</th>}
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody>
                 {lostItems.map((item) => (
-                  <tr key={item.itemId} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {item.itemId}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                      {item.itemName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.category}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.brand}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.color}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.location}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.lostDate}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.username}
-                    </td>
+                  <tr key={item.itemId}>
+                    <td>{item.itemId}</td>
+                    <td>{item.itemName}</td>
+                    <td>{item.category}</td>
+                    <td>{item.brand}</td>
+                    <td>{item.color}</td>
+                    <td>{item.location}</td>
+                    <td>{item.lostDate}</td>
+                    <td>{item.username}</td>
                     {currentUser?.role === "Student" && (
-                      <td className="px-6 py-4 text-sm font-medium">
+                      <td>
                         <button
                           onClick={() => handleFoundSubmission(item.itemId)}
-                          className="bg-green-500 text-white font-bold py-2 px-4 rounded-md hover:bg-green-600"
+                          className="btn btn-success btn-sm fw-semibold"
                         >
                           Mark as Found
                         </button>
@@ -150,10 +279,10 @@ const LostItemReport = () => {
           </div>
         )}
 
-        <div className="flex justify-end mt-6">
+        <div className="text-end mt-4">
           <button
             onClick={returnBack}
-            className="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-indigo-700 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            className="btn btn-primary btn-sm fw-semibold px-3 py-1"
           >
             Return
           </button>
