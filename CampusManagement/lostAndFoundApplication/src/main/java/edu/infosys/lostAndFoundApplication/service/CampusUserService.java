@@ -47,4 +47,18 @@ public class CampusUserService implements UserDetailsService{
 	public List<CampusUser> getAllStudents(){
 		return repository.getAllStudents();
 	}
+	
+	public void deleteByUsername(String username) {
+	    repository.deleteById(username);
+	}
+	public void deleteStudentByUsername(String username) {
+	    CampusUser user = repository.findById(username)
+	        .orElseThrow(() -> new RuntimeException("User not found"));
+	    
+	    if ("STUDENT".equalsIgnoreCase(user.getRole())) {
+	        repository.deleteById(username);
+	    } else {
+	        throw new RuntimeException("Cannot delete non-student users");
+	    }
+	}
 }

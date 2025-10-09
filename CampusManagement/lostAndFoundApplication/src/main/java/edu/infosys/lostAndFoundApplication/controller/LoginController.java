@@ -53,4 +53,8 @@ public class LoginController {
 	public List<CampusUser> getAllStudents(){
 		return service.getAllStudents();
 	}
+	@DeleteMapping("/student/{username}")
+	public void deleteStudent(@PathVariable String username) {
+		service.deleteByUsername(username);
+	}
 }

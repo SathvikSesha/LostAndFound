@@ -1,33 +1,85 @@
-HELP.md
+# ==========================
+# Maven
+# ==========================
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# ==========================
+# Logs
+# ==========================
+*.log
+*.out
+*.err
+
+# ==========================
+# OS generated files
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Build artifacts
+# ==========================
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ==========================
+# Dependencies (for frontend etc.)
+# ==========================
+node_modules/
+dist/
+
+# ==========================
+# Environment / Config Files
+# ==========================
+.env
+*.env.local
+application.properties
+application.yml
+application-local.yml
+
+# ==========================
+# Eclipse / STS
+# ==========================
 .apt_generated
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
+.metadata/  
 
-### IntelliJ IDEA ###
-.idea
+# ==========================
+# IntelliJ IDEA
+# ==========================
+.idea/
 *.iws
 *.iml
 *.ipr
+out/
 
-### NetBeans ###
+# ==========================
+# NetBeans
+# ==========================
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
 
-### VS Code ###
+# ==========================
+# VS Code
+# ==========================
 .vscode/
+
+# ==========================
+# Backup / Temp Files
+# ==========================
+*.swp
+*.swo
+*.bak
+*.tmp

@@ -1,0 +1,46 @@
+package edu.infosys.lostAndFoundApplication.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+import edu.infosys.lostAndFoundApplication.bean.FoundItem;
+
+public class FoundItemDaoImpl implements FoundItemDao {
+
+	@Override
+	public Long findMaxIdNumber() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public FoundItem save(FoundItem foundItem) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FoundItem> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Optional<FoundItem> findById(String id) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
+
+	@Override
+	public void deleteById(String id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<FoundItem> findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
