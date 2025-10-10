@@ -1,58 +1,31 @@
 import axios from "axios";
-const ITEM_URL = "http://localhost:9999/lost-found/item";
-const ITEMID_URL = "http://localhost:9999/lost-found/id-gen";
-const LOST_URL = "http://localhost:9999/lost-found/not-found";
-const FOUND_URL = "http://localhost:9999/lost-found/found";
-const LOSTUSER_URL = "http://localhost:9999/lost-found/lost";
-const FOUNDUSER_URL = "http://localhost:9999/lost-found/lostfound";
+
 const BASE_URL = "http://localhost:9999/lost-found";
 
-export const getAllItems = () => {
-  return axios.get(ITEM_URL);
-};
+export const getAllLostItems = () => axios.get(`${BASE_URL}/lost-items`);
 
-export const lostItemSubmission = (lostItem) => {
-  return axios.post(ITEM_URL, lostItem);
-};
+export const getLostItemsByUser = () =>
+  axios.get(`${BASE_URL}/lost-items/user`);
 
-export const foundItemSubmission = (lostItem) => {
-  return axios.put(ITEM_URL, lostItem);
-};
+export const getLostItemById = (id) =>
+  axios.get(`${BASE_URL}/lost-items/${id}`);
 
-export const getItemById = (id) => {
-  return axios.get(ITEM_URL + "/" + id);
-};
+export const lostItemSubmission = (lostItem) =>
+  axios.post(`${BASE_URL}/lost-items`, lostItem);
 
-export const deleteItemById = (id) => {
-  return axios.delete(ITEM_URL + "/" + id);
-};
+export const deleteLostItemById = (id) =>
+  axios.delete(`${BASE_URL}/lost-items/${id}`);
 
-export const itemIdGenerator = () => {
-  return axios.get(ITEMID_URL);
-};
+export const getAllFoundItems = () => axios.get(`${BASE_URL}/found-items`);
 
-export const notFoundItemList = () => {
-  return axios.get(LOST_URL);
-};
+export const getFoundItemsByUser = () =>
+  axios.get(`${BASE_URL}/found-items/user`);
 
-export const foundItemList = () => {
-  return axios.get(FOUND_URL);
-};
+export const getFoundItemById = (id) =>
+  axios.get(`${BASE_URL}/found-items/${id}`);
 
-export const lostItemListByUser = () => {
-  return axios.get(LOSTUSER_URL);
-};
+export const foundItemSubmission = (foundItem) =>
+  axios.post(`${BASE_URL}/found-items`, foundItem);
 
-export const foundItemListByUser = () => {
-  return axios.get(FOUNDUSER_URL);
-};
-
-export const markItemAsFound = async (itemId, foundDate) => {
-  // Fetch existing item to avoid overwriting other fields with nulls
-  const existing = await axios.get(`${ITEM_URL}/${itemId}`);
-  const updated = { ...existing.data, foundDate };
-  return axios.put(ITEM_URL, updated);
-};
-
-// Students
-export const getAllStudents = () => axios.get(`${BASE_URL}/student`);
+export const deleteFoundItemById = (id) =>
+  axios.delete(`${BASE_URL}/found-items/${id}`);
