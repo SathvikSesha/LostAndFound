@@ -9,7 +9,6 @@ const FoundItemSubmit = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [newId, setNewId] = useState("");
   const [campusUser, setCampusUser] = useState(null);
 
   const today = new Date().toISOString().slice(0, 10);
@@ -23,6 +22,7 @@ const FoundItemSubmit = () => {
     color: "",
     brand: "",
     location: "",
+    foundDate: "",
   });
 
   useEffect(() => {
@@ -61,8 +61,6 @@ const FoundItemSubmit = () => {
       (tempErrors.location = "Location required"), (valid = false);
     if (!foundDate)
       (tempErrors.foundDate = "Found Date required"), (valid = false);
-    if (!entryDate)
-      (tempErrors.entryDate = "Entry Date required"), (valid = false);
 
     if (!valid) {
       setErrors(tempErrors);
@@ -72,9 +70,9 @@ const FoundItemSubmit = () => {
 
     const finalItem = {
       ...item,
-      itemId: newId,
+      username: campusUser.username,
+      userEmail: campusUser.email,
       foundDate,
-      entryDate,
     };
 
     foundItemSubmission(finalItem)

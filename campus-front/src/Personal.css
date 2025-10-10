@@ -1,5 +1,5 @@
 .profile-page {
-  min-height: 100vh;
+  min-height: 70vh !important;
   background: linear-gradient(135deg, #dfe9f3, #ffffff);
 }
 
@@ -35,7 +35,7 @@
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #007bff, #6610f2);
+  background: linear-gradient(135deg, #007bff, #10f2c9);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,6 +76,11 @@
 .return-btn {
   transition: all 0.3s ease;
   border: 2px solid #007bff !important;
+  width: 300px !important;
+  font-size: 20px !important;
+  border-radius: 25px;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+  color: #555;
 }
 
 .return-btn:hover {
@@ -87,4 +92,8 @@
 
 .bg-gradient {
   background: linear-gradient(135deg, #007bff, #6610f2);
+}
+
+.badge {
+  color: rgb(104, 62, 7) !important;
 }

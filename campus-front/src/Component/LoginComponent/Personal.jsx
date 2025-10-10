@@ -27,32 +27,35 @@ const Personal = () => {
     return (
       <div className="d-flex justify-content-center align-items-center vh-100">
         <Spinner animation="border" variant="primary" />
-        <span className="ms-2 fw-semibold text-muted">Loading your details...</span>
+        <span className="ms-2 fw-semibold text-muted">
+          Loading your details...
+        </span>
       </div>
     );
 
   if (error)
     return (
-      <div className="text-center mt-5 text-danger fw-semibold fs-5">{error}</div>
+      <div className="text-center mt-5 text-danger fw-semibold fs-5">
+        {error}
+      </div>
     );
 
   return (
     <div className="profile-page d-flex justify-content-center align-items-center py-5">
       <Card className="profile-card shadow-lg p-4 animate-rise">
-        <div className="text-center mb-4">
+        <div className="text-center mb-3">
           <div className="profile-pic mx-auto mb-3">
             <i className="bi bi-person-circle text-primary fs-1"></i>
           </div>
-          <h3 className="fw-bold text-primary">{user.personName}</h3>
-          <p className="text-muted mb-0">{user.email}</p>
-          <span className="badge rounded-pill bg-gradient text-light px-3 py-2 mt-2">
+          <h3 className="fw-bold text-black">{user.personName}</h3>
+          <span className="badge rounded-pill bg-gradient text-green px-3 py-2 mt-1">
             {user.role}
           </span>
         </div>
 
         <hr className="opacity-50" />
 
-        <div className="details-section mt-3">
+        <div className="details-section">
           <div className="detail-row">
             <strong>👤 Username:</strong> <span>{user.username}</span>
           </div>
@@ -64,12 +67,12 @@ const Personal = () => {
           </div>
         </div>
 
-        <div className="text-center mt-4">
+        <div className="text-center mt-2">
           <button
             onClick={() =>
               navigate(user.role === "Admin" ? "/AdminMenu" : "/StudentMenu")
             }
-            className="btn btn-outline-primary rounded-pill px-5 fw-semibold return-btn"
+            className="return-btn"
           >
             ← Back to Menu
           </button>

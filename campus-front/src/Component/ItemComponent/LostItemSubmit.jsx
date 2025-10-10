@@ -19,6 +19,7 @@ const LostItemSubmit = () => {
     color: "",
     brand: "",
     location: "",
+    lostDate: "",
   });
 
   const today = new Date().toISOString().slice(0, 10);
@@ -70,7 +71,7 @@ const LostItemSubmit = () => {
       ...item,
       username: campusUser.username,
       userEmail: campusUser.email,
-      lostDate: ldate,
+      lostDate: lostDate,
     };
 
     lostItemSubmission(finalItem)

@@ -48,6 +48,8 @@
 .return-btn {
   transition: all 0.3s ease;
   border: 2px solid #6c757d !important;
+  width: 150px !important;
+  font-size: 16px !important;
 }
 
 .return-btn:hover {
@@ -71,4 +73,7 @@
     transform: scale(1);
     opacity: 1;
   }
+}
+.table-row-hover {
+  text-shadow: none !important;
 }
