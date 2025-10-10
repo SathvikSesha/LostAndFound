@@ -1,114 +1,125 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  getFoundItemById,
-  markItemAsFound,
+  getLostItemById,
+  deleteLostItemById,
+  foundItemSubmission,
 } from "../../Services/LostFoundItemService";
-import { FaCheckCircle } from "react-icons/fa";
+import { getUserDetails } from "../../Services/LoginService";
+import { FaCheckCircle, FaArrowLeft } from "react-icons/fa";
 
 const FoundItemRedirected = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [lostItem, setLostItem] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [item, setItem] = useState(null);
-  const [foundDate, setFoundDate] = useState(
-    new Date().toISOString().slice(0, 10)
-  );
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const today = new Date().toISOString().slice(0, 10);
 
   useEffect(() => {
-    getFoundItemById(id)
-      .then((res) => setItem(res.data))
-      .catch(() => setError("Could not load item details."));
+    Promise.all([getUserDetails(), getLostItemById(id)])
+      .then(([userRes, itemRes]) => {
+        setUser(userRes.data);
+        setLostItem(itemRes.data);
+      })
+      .catch(() => alert("Failed to load item details"))
+      .finally(() => setLoading(false));
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!foundDate) return setError("Please select a valid found date.");
-    setIsSubmitting(true);
+  const handleMarkAsFound = async () => {
+    if (!lostItem || !user) return;
+
+    const foundItem = {
+      itemName: lostItem.itemName,
+      category: lostItem.category,
+      color: lostItem.color,
+      brand: lostItem.brand,
+      location: lostItem.location,
+      username: user.username,
+      userEmail: user.email,
+      foundDate: today,
+    };
 
     try {
-      await markItemAsFound(item.itemId, foundDate);
-      alert("Item successfully marked as found!");
-      navigate("/FoundReport");
-    } catch {
-      setError("Failed to mark item as found. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      await foundItemSubmission(foundItem);
+      await deleteLostItemById(lostItem.lostItemId);
+      alert("Item marked as found successfully!");
+      navigate(user.role === "Admin" ? "/AdminMenu" : "/StudentMenu");
+    } catch (error) {
+      console.error(error);
+      alert("Operation failed. Please try again.");
     }
   };
 
-  if (!item) return <div className="text-center mt-10">Loading item...</div>;
+  if (loading)
+    return (
+      <div className="text-center mt-5 text-secondary fs-6">
+        Loading item details...
+      </div>
+    );
 
-  const inputStyles =
-    "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500";
-  const labelStyles = "block text-sm font-medium text-gray-700 mb-1";
+  if (!lostItem)
+    return (
+      <div className="text-center mt-5 text-secondary fs-6">
+        Item not found.
+      </div>
+    );
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-2xl bg-white rounded-xl shadow-lg p-8 space-y-6">
-        <div className="flex flex-col items-center">
-          <FaCheckCircle size={40} className="text-green-500 mb-4" />
-          <h2 className="text-3xl font-bold text-gray-800 text-center">
-            Found Item Submission
-          </h2>
-          <p className="text-gray-500 mt-2 text-center">
-            Confirm the details and select the date the item was found.
+    <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light py-4">
+      <div className="card shadow-lg p-4 rounded-4" style={{ width: "28rem" }}>
+        <div className="text-center mb-4">
+          <FaCheckCircle size={50} className="text-success mb-3" />
+          <h4 className="fw-bold text-primary mb-2">Mark Item as Found</h4>
+          <p className="text-muted small">
+            Review the item details before confirming.
           </p>
         </div>
 
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        <div className="border rounded p-3 bg-white mb-3">
+          <ul className="list-group list-group-flush small">
+            <li className="list-group-item">
+              <strong>Item Name:</strong> {lostItem.itemName}
+            </li>
+            <li className="list-group-item">
+              <strong>Category:</strong> {lostItem.category}
+            </li>
+            <li className="list-group-item">
+              <strong>Brand:</strong> {lostItem.brand}
+            </li>
+            <li className="list-group-item">
+              <strong>Color:</strong> {lostItem.color}
+            </li>
+            <li className="list-group-item">
+              <strong>Location Lost:</strong> {lostItem.location}
+            </li>
+            <li className="list-group-item">
+              <strong>Reported By:</strong> {lostItem.username}
+            </li>
+            <li className="list-group-item">
+              <strong>Lost Date:</strong> {lostItem.lostDate}
+            </li>
+            <li className="list-group-item">
+              <strong>Found Date:</strong> {today}
+            </li>
+          </ul>
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              "itemId",
-              "itemName",
-              "category",
-              "brand",
-              "color",
-              "location",
-            ].map((field) => (
-              <div key={field}>
-                <label className={labelStyles}>
-                  {field
-                    .replace(/([A-Z])/g, " $1")
-                    .replace(/^./, (str) => str.toUpperCase())}
-                </label>
-                <input
-                  type="text"
-                  name={field}
-                  value={item[field] ?? ""}
-                  className={`${inputStyles} bg-gray-100 cursor-not-allowed`}
-                  readOnly
-                />
-              </div>
-            ))}
-
-            <div className="md:col-span-2">
-              <label htmlFor="foundDate" className={labelStyles}>
-                Select Found Date *
-              </label>
-              <input
-                type="date"
-                id="foundDate"
-                value={foundDate}
-                onChange={(e) => setFoundDate(e.target.value)}
-                className={inputStyles}
-                required
-              />
-            </div>
-          </div>
-
+        <div className="d-flex justify-content-between mt-3">
           <button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full bg-indigo-600 text-white font-bold py-3 px-4 rounded-md hover:bg-indigo-700 disabled:opacity-50 transition duration-150 ease-in-out mt-6"
+            onClick={() => navigate(-1)}
+            className="btn btn-secondary fw-semibold d-flex align-items-center gap-2"
           >
-            {isSubmitting ? "Submitting..." : "Mark as Found"}
+            <FaArrowLeft /> Return
           </button>
-        </form>
+          <button
+            onClick={handleMarkAsFound}
+            className="btn btn-success fw-semibold"
+          >
+            Confirm Found
+          </button>
+        </div>
       </div>
     </div>
   );

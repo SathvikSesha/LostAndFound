@@ -14,10 +14,8 @@ const FoundItemSubmit = () => {
 
   const today = new Date().toISOString().slice(0, 10);
   const [foundDate, setFoundDate] = useState(today);
-  const [entryDate, setEntryDate] = useState(today);
 
   const [item, setItem] = useState({
-    itemId: 0,
     username: "",
     userEmail: "",
     itemName: "",
@@ -110,14 +108,6 @@ const FoundItemSubmit = () => {
             {/* Left */}
             <div className="col-md-6">
               <div className="mb-3">
-                <label className="form-label">Generated Item ID</label>
-                <input
-                  className="form-control bg-light"
-                  value={newId}
-                  readOnly
-                />
-              </div>
-              <div className="mb-3">
                 <label className="form-label">User Name</label>
                 <input
                   className="form-control bg-light"
@@ -145,20 +135,6 @@ const FoundItemSubmit = () => {
                 />
                 {errors.foundDate && (
                   <div className="invalid-feedback">{errors.foundDate}</div>
-                )}
-              </div>
-              <div className="mb-3">
-                <label className="form-label">Entry Date *</label>
-                <input
-                  type="date"
-                  className={`form-control ${
-                    errors.entryDate ? "is-invalid" : ""
-                  }`}
-                  value={entryDate}
-                  onChange={(e) => setEntryDate(e.target.value)}
-                />
-                {errors.entryDate && (
-                  <div className="invalid-feedback">{errors.entryDate}</div>
                 )}
               </div>
             </div>

@@ -84,22 +84,20 @@ const FoundItemReport = () => {
                   <th>Brand</th>
                   <th>Location</th>
                   <th>Found Date</th>
-                  <th>Entry Date</th>
                   <th>Reported By</th>
                   <th>Email</th>
                 </tr>
               </thead>
               <tbody>
                 {itemList.map((item) => (
-                  <tr key={item.itemId}>
-                    <td>{item.itemId}</td>
+                  <tr key={item.foundItemId}>
+                    <td>{item.foundItemId}</td>
                     <td>{item.itemName}</td>
                     <td>{item.category}</td>
                     <td>{item.color}</td>
                     <td>{item.brand}</td>
                     <td>{item.location}</td>
                     <td>{item.foundDate}</td>
-                    <td>{item.entryDate}</td>
                     <td>{item.username}</td>
                     <td>{item.userEmail}</td>
                   </tr>

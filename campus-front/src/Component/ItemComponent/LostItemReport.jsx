@@ -86,8 +86,8 @@ const LostItemReport = () => {
               </thead>
               <tbody>
                 {lostItems.map((item) => (
-                  <tr key={item.itemId}>
-                    <td>{item.itemId}</td>
+                  <tr key={item.lostItemId}>
+                    <td>{item.lostItemId}</td>
                     <td>{item.itemName}</td>
                     <td>{item.category}</td>
                     <td>{item.brand}</td>
@@ -98,10 +98,10 @@ const LostItemReport = () => {
                     {currentUser?.role === "Student" && (
                       <td>
                         <button
-                          onClick={() => handleFoundSubmission(item.itemId)}
+                          onClick={() => handleFoundSubmission(item.lostItemId)}
                           className="btn btn-success btn-sm fw-semibold"
                         >
-                          Mark as Found
+                          Mark
                         </button>
                       </td>
                     )}
