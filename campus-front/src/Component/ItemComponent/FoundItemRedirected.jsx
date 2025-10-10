@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  getItemById,
+  getFoundItemById,
   markItemAsFound,
 } from "../../Services/LostFoundItemService";
 import { FaCheckCircle } from "react-icons/fa";
@@ -18,7 +18,7 @@ const FoundItemRedirected = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    getItemById(id)
+    getFoundItemById(id)
       .then((res) => setItem(res.data))
       .catch(() => setError("Could not load item details."));
   }, [id]);

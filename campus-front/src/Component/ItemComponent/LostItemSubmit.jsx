@@ -9,11 +9,9 @@ const LostItemSubmit = () => {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [newId, setNewId] = useState("");
   const [campusUser, setCampusUser] = useState(null);
 
   const [item, setItem] = useState({
-    itemId: 0,
     username: "",
     userEmail: "",
     itemName: "",
@@ -25,7 +23,6 @@ const LostItemSubmit = () => {
 
   const today = new Date().toISOString().slice(0, 10);
   const [lostDate, setLostDate] = useState(today);
-  const [entryDate, setEntryDate] = useState(today);
 
   useEffect(() => {
     getUserDetails().then((response) => {
@@ -63,9 +60,6 @@ const LostItemSubmit = () => {
       (tempErrors.location = "Location required"), (valid = false);
     if (!lostDate)
       (tempErrors.lostDate = "Lost Date required"), (valid = false);
-    if (!entryDate)
-      (tempErrors.entryDate = "Entry Date required"), (valid = false);
-
     if (!valid) {
       setErrors(tempErrors);
       setIsSubmitting(false);
@@ -74,9 +68,9 @@ const LostItemSubmit = () => {
 
     const finalItem = {
       ...item,
-      itemId: newId,
-      lostDate,
-      entryDate,
+      username: campusUser.username,
+      userEmail: campusUser.email,
+      lostDate: ldate,
     };
 
     lostItemSubmission(finalItem)
@@ -110,14 +104,6 @@ const LostItemSubmit = () => {
             {/* Left side */}
             <div className="col-md-6">
               <div className="mb-3">
-                <label className="form-label">Generated Item ID</label>
-                <input
-                  className="form-control bg-light"
-                  value={newId}
-                  readOnly
-                />
-              </div>
-              <div className="mb-3">
                 <label className="form-label">User Name</label>
                 <input
                   className="form-control bg-light"
@@ -147,22 +133,7 @@ const LostItemSubmit = () => {
                   <div className="invalid-feedback">{errors.lostDate}</div>
                 )}
               </div>
-              <div className="mb-3">
-                <label className="form-label">Entry Date *</label>
-                <input
-                  type="date"
-                  className={`form-control ${
-                    errors.entryDate ? "is-invalid" : ""
-                  }`}
-                  value={entryDate}
-                  onChange={(e) => setEntryDate(e.target.value)}
-                />
-                {errors.entryDate && (
-                  <div className="invalid-feedback">{errors.entryDate}</div>
-                )}
-              </div>
             </div>
-
             {/* Right side */}
             <div className="col-md-6">
               {["itemName", "category", "color", "brand", "location"].map(
