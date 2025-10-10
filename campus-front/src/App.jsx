@@ -8,7 +8,6 @@ import LostItemSubmit from "./Component/ItemComponent/LostItemSubmit";
 import FoundItemSubmit from "./Component/ItemComponent/FoundItemSubmit";
 import LostItemReport from "./Component/ItemComponent/LostItemReport";
 import FoundItemReport from "./Component/ItemComponent/FoundItemReport";
-import SingleStudentDetails from "./Component/LoginComponent/SingleStudentDetails";
 import StudentList from "./Component/LoginComponent/StudentList";
 import FoundItemRedirected from "./Component/ItemComponent/FoundItemRedirected";
 import Personal from "./Component/LoginComponent/Personal";
@@ -27,10 +26,6 @@ function App() {
             <Route path="/AdminMenu" element={<AdminMenu />} />
             <Route path="/StudentMenu" element={<StudentMenu />} />
 
-            <Route
-              path="/SingleStudentDetail"
-              element={<SingleStudentDetails />}
-            />
             <Route path="/Students" element={<StudentList />} />
 
             <Route path="/lostSubmit" element={<LostItemSubmit />}></Route>
