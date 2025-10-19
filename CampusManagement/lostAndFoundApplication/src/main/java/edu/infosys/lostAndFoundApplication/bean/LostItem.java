@@ -17,23 +17,31 @@ public class LostItem {
     private String brand;
     private String location;
     private String lostDate;
+    private boolean status;
 
 
     public LostItem() {
         super();
     }
 
-    public LostItem(String lostItemId, String username, String userEmail, String itemName, String category, String color, String brand, String location, String lostDate) {
-        this.lostItemId = lostItemId;
-        this.username = username;
-        this.userEmail = userEmail;
-        this.itemName = itemName;
-        this.category = category;
-        this.color = color;
-        this.brand = brand;
-        this.location = location;
-        this.lostDate = lostDate;
-    }
+    
+
+	public LostItem(String lostItemId, String username, String userEmail, String itemName, String category,
+			String color, String brand, String location, String lostDate, boolean status) {
+		super();
+		this.lostItemId = lostItemId;
+		this.username = username;
+		this.userEmail = userEmail;
+		this.itemName = itemName;
+		this.category = category;
+		this.color = color;
+		this.brand = brand;
+		this.location = location;
+		this.lostDate = lostDate;
+		this.status = status;
+	}
+
+
 
 	public String getLostItemId() {
 		return lostItemId;
@@ -106,6 +114,19 @@ public class LostItem {
 	public void setLostDate(String lostDate) {
 		this.lostDate = lostDate;
 	}
+	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
 
 	@Override
 	public String toString() {

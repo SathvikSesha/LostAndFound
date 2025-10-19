@@ -16,22 +16,30 @@ public class FoundItem {
     private String brand;
     private String location;
     private String foundDate;
+    private boolean status;
 
     public FoundItem() {
         super();
     }
 
-    public FoundItem(String foundItemId, String username, String userEmail, String itemName, String category, String color, String brand, String location, String foundDate) {
-        this.foundItemId = foundItemId;
-        this.username = username;
-        this.userEmail = userEmail;
-        this.itemName = itemName;
-        this.category = category;
-        this.color = color;
-        this.brand = brand;
-        this.location = location;
-        this.foundDate = foundDate;
-    }
+    
+
+	public FoundItem(String foundItemId, String username, String userEmail, String itemName, String category,
+			String color, String brand, String location, String foundDate, boolean status) {
+		super();
+		this.foundItemId = foundItemId;
+		this.username = username;
+		this.userEmail = userEmail;
+		this.itemName = itemName;
+		this.category = category;
+		this.color = color;
+		this.brand = brand;
+		this.location = location;
+		this.foundDate = foundDate;
+		this.status = status;
+	}
+
+
 
 	public String getFoundItemId() {
 		return foundItemId;
@@ -104,6 +112,20 @@ public class FoundItem {
 	public void setFoundDate(String foundDate) {
 		this.foundDate = foundDate;
 	}
+	
+	
+
+	public boolean isStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+
 
 	@Override
 	public String toString() {

@@ -12,6 +12,8 @@ public class LostAndFoundApplication {
 
 }
 /*
- * user name : Lotus Password : Mango Role: Admin
- * username : Tulip Password : Apple Role: Student
+ * username:SathvikSesha password:Sathvik@31 role : admin
+ * username : Shiva password:Shiva@31 role student
+ * username : hari password : Hari@31 role student
+ * 
  */

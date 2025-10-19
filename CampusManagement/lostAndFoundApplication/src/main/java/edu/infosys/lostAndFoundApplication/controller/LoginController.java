@@ -54,7 +54,7 @@ public class LoginController {
 		return service.getAllStudents();
 	}
 	@DeleteMapping("/student/{username}")
-	public void deleteStudent(@PathVariable String username) {
-		service.deleteByUsername(username);
+	public void deleteStudentByUsername(@PathVariable String username) {
+		service.deleteStudentByUsername(username);
 	}
 }
