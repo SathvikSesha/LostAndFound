@@ -1,29 +1,81 @@
-.delete-student-page {
-  background: linear-gradient(135deg, #e3f2fd, #f9f9ff);
+.delete-student-container {
   min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafa, #c2defd);
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.modern-card {
-  border: none;
-  border-radius: 20px;
-  backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.9);
+.header-section h3 {
+  font-size: 1.6rem; /* Reduced from 2rem */
+  letter-spacing: 0.4px;
+}
+
+.header-subtitle {
+  font-size: 0.85rem; /* smaller subtitle */
+}
+
+.student-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.2rem;
+  padding: 0 2rem;
+}
+
+.student-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.2rem 1rem;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+  text-align: center;
   transition: all 0.3s ease;
+  border: 1px solid #e3eaf5;
 }
 
-.modern-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+.student-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 136, 255, 0.2);
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.7s ease-in-out;
+.student-card-content .icon {
+  color: #007bff;
+  margin-right: 6px;
 }
 
-@keyframes fadeIn {
+.delete-btn-small {
+  border-radius: 20px;
+  font-size: 0.8rem !important;
+  font-weight: 500;
+  padding: 4px 12px !important;
+  border-width: 2px; /* thinner outline */
+  transition: all 0.2s ease !important;
+  width: 75% !important;
+}
+
+.delete-btn-small:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.return-btn-small {
+  font-size: 1.2rem !important;
+  padding: 6px 18px;
+  border-radius: 25px;
+  transition: all 0.3s ease !important;
+  width: 15% !important;
+}
+
+.return-btn-small:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease both;
+}
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -31,49 +83,11 @@
   }
 }
 
-.table-row-hover:hover {
-  background-color: #f1f9ff !important;
-  transition: background 0.3s;
-}
-
-.delete-btn {
-  transition: all 0.3s ease;
-}
-
-.delete-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
-}
-
-.return-btn {
-  transition: all 0.3s ease;
-  border: 2px solid #6c757d !important;
-  width: 150px !important;
-  font-size: 16px !important;
-}
-
-.return-btn:hover {
-  background-color: #6c757d !important;
-  color: white !important;
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(108, 117, 125, 0.3);
-}
-
-.fade-modal .modal-content {
-  border-radius: 15px;
-  animation: popUp 0.3s ease-in-out;
-}
-
-@keyframes popUp {
+@keyframes fadeIn {
   from {
-    transform: scale(0.9);
     opacity: 0;
   }
   to {
-    transform: scale(1);
     opacity: 1;
   }
-}
-.table-row-hover {
-  text-shadow: none !important;
 }

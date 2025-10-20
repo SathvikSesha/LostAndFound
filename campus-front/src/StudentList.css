@@ -1,48 +1,78 @@
-/* Full-page background and alignment */
+/* --- Page Layout --- */
 .student-list-page {
-  background-color: #ffffff; /* clean white background */
+  padding: 40px 20px;
+  background: linear-gradient(145deg, #faf8f9, #c2fdfccd);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Card style */
-.student-list-card {
-  max-width: 1200px;
-  border-radius: 10px;
-  background-color: #fff;
-  transition: box-shadow 0.2s ease-in-out, transform 0.2s;
+/* --- Header --- */
+.student-header {
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-.student-list-card:hover {
-  box-shadow: 0 8px 25px 11px rgba (0, 0, 0, 0.1);
-  transform: translateY(-2px);
+.student-header h2 {
+  font-weight: 700;
+  color: #0d6efd;
 }
 
-/* Table design */
-.table {
-  border-radius: 8px;
-  font-size: 0.9rem;
+.student-header p {
+  color: #6c757d;
+  font-size: 15px;
 }
 
-.table thead th {
-  background-color: #0d6efd !important;
-  color: #fff !important;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.3px;
+/* --- Student Grid --- */
+.student-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  width: 90%;
+  max-width: 1100px;
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: #f8faff;
+/* --- Student Card --- */
+.student-card-glow {
+  background: rgb(255, 248, 248);
+  border-radius: 16px;
+  padding: 20px 25px;
+  box-shadow: 0 0 12px rgba(13, 110, 253, 0.15);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(7, 57, 132, 0.15);
 }
 
-.table-hover tbody tr:hover {
-  background-color: #eef6ff !important;
-  transition: background-color 0.2s ease-in-out;
+.student-card-glow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(13, 110, 253, 0.35);
 }
 
-/* Heading style */
-h4 {
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+/* --- Text Styles --- */
+.student-name {
+  font-weight: 700;
+  color: #0d6efd;
+  margin-bottom: 5px;
+}
+
+.student-username {
+  color: #495057;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.student-info p {
+  color: #4f2121;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.student-info strong {
+  color: #000;
+}
+
+/* --- Icons --- */
+.icon {
+  margin-right: 6px;
+  color: #0dfd65;
 }
