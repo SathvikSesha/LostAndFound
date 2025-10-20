@@ -17,4 +17,7 @@ public interface LostItemDao {
     void deleteById(String id);
 
     List<LostItem> findByUsername(String username);
+    
+    List<LostItem> findAllItems();
+    
 }

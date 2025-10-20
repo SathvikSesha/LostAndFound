@@ -41,4 +41,9 @@ public class FoundItemDaoImpl implements FoundItemDao {
     public List<FoundItem> findByUsername(String username) {
         return foundItemRepository.findByUsername(username);
     }
+
+	@Override
+	public List<FoundItem> getTotalFoundItem() {
+		return foundItemRepository.findAll();
+	}
 }

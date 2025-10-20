@@ -2,12 +2,16 @@ package edu.infosys.lostAndFoundApplication.service;
 import edu.infosys.lostAndFoundApplication.bean.LostItem;
 import edu.infosys.lostAndFoundApplication.dao.LostItemDao;
 import edu.infosys.lostAndFoundApplication.dao.LostItemRepository;
-import org.apache.commons.text.similarity.LevenshteinDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import edu.infosys.lostAndFoundApplication.util.FuzzySearchUtil;
+import java.util.Comparator;
+import java.util.Map;
+import java.util.LinkedHashMap;
+
 
 @Service
 public class LostItemService {
@@ -17,36 +21,6 @@ public class LostItemService {
     
     @Autowired
 	private LostItemRepository repository;
-    private final LevenshteinDistance levenshtein = new LevenshteinDistance();
-
-    public List<LostItem> keywordSearch(String keyword) {
-        return repository.searchByKeyword(keyword);
-    }
-    
-    public List<LostItem> fuzzySearch(String keyword) {
-        List<LostItem> all = repository.findAll();
-        return all.stream()
-                .filter(l ->
-                        isSimilarField(l.getItemName(), keyword) ||
-                        isSimilarField(l.getColor(), keyword) ||
-                        isSimilarField(l.getBrand(), keyword) ||
-                        isSimilarField(l.getLocation(), keyword) ||
-                        isSimilarField(l.getCategory(), keyword)
-                ).collect(Collectors.toList());
-    }
-
-
-    private boolean isSimilarField(String field, String keyword) {
-        if (field == null) return false;
-        String[] tokens = field.split("\\s+"); // split by space
-        for (String token : tokens) {
-            int distance = levenshtein.apply(token.toLowerCase(), keyword.toLowerCase());
-            if (distance <= 2) {  // allow small typo/misspelling
-                return true;
-            }
-        }
-        return false;
-    }
     
     public synchronized String generateNextLostItemId() {
         Long maxId = lostItemDao.findMaxIdNumber();
@@ -76,4 +50,44 @@ public class LostItemService {
     public List<LostItem> getLostItemsByUsername(String username) {
         return lostItemDao.findByUsername(username);
     }
+    
+    public int findAllItems() {
+    	return lostItemDao.findAllItems().size();
+    }
+    
+    /**
+     * Fuzzy search across multiple fields (itemName, category, brand, color, location).
+     * Returns results sorted by a very simple score (higher = better).
+     */
+    public List<LostItem> searchLostItems(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return List.of();
+        }
+        String q = query.trim().toLowerCase();
+        List<LostItem> all = repository.findAll();
+        Map<LostItem, Double> scored = new LinkedHashMap<>();
+
+        for (LostItem item : all) {
+            double score = 0.0;
+            if (item.getItemName() != null && item.getItemName().toLowerCase().contains(q)) score += 2.0;
+            if (item.getCategory() != null && item.getCategory().toLowerCase().contains(q)) score += 1.5;
+            if (item.getBrand() != null && item.getBrand().toLowerCase().contains(q)) score += 1.2;
+            if (item.getColor() != null && item.getColor().toLowerCase().contains(q)) score += 0.8;
+            if (item.getLocation() != null && item.getLocation().toLowerCase().contains(q)) score += 0.8;
+            if (FuzzySearchUtil.isFuzzyMatch(item.getItemName(), q)) score += 1.5;
+            if (FuzzySearchUtil.isFuzzyMatch(item.getCategory(), q)) score += 1.0;
+            if (FuzzySearchUtil.isFuzzyMatch(item.getBrand(), q)) score += 0.9;
+            if (FuzzySearchUtil.isFuzzyMatch(item.getColor(), q)) score += 0.5;
+            if (FuzzySearchUtil.isFuzzyMatch(item.getLocation(), q)) score += 0.5;
+
+            if (score > 0) {
+                scored.put(item, score);
+            }
+        }
+        return scored.entrySet().stream()
+                .sorted(Map.Entry.<LostItem, Double>comparingByValue(Comparator.reverseOrder()))
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
+    }
+
 }

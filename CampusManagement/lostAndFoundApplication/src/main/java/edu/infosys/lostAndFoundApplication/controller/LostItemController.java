@@ -47,4 +47,9 @@ public class LostItemController {
         String username = campusUserService.getUserId();
         return lostItemService.getLostItemsByUsername(username);
     }
+    
+    @GetMapping("/count")
+    public int findAllItems() {
+    	return lostItemService.findAllItems();
+    }
 }

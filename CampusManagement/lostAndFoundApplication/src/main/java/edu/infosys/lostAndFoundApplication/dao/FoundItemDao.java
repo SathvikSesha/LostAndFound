@@ -17,4 +17,6 @@ public interface FoundItemDao {
     void deleteById(String id);
 
     List<FoundItem> findByUsername(String username);
+    
+    List<FoundItem> getTotalFoundItem();
 }

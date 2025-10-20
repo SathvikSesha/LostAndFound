@@ -42,5 +42,10 @@ public class LostItemDaoImpl implements LostItemDao {
 		return lostItemRepository.findByUsername(username);
 	}
 
+	@Override
+	public List<LostItem> findAllItems() {
+		return lostItemRepository.findAll();
+	}
+
     
 }

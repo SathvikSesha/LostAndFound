@@ -48,6 +48,10 @@ public class CampusUserService implements UserDetailsService{
 		return repository.getAllStudents();
 	}
 	
+	public int getTotalStudents() {
+		return repository.getAllStudents().size();
+	}
+	
 	public void deleteByUsername(String username) {
 	    repository.deleteById(username);
 	}

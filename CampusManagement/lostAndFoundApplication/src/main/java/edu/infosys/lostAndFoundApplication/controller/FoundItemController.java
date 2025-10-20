@@ -47,4 +47,9 @@ public class FoundItemController {
         String username = campusUserService.getUserId();
         return foundItemService.getFoundItemsByUsername(username);
     }
+    
+    @GetMapping("/count")
+    public int getTotalFoundItem() {
+    	return foundItemService.getTotalFoundItem();
+    }
 }
