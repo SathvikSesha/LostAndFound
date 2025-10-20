@@ -13,6 +13,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+.text-muted {
+  font-size: 24px !important;
+}
+
 /* Header */
 .lost-item-header {
   text-align: center;

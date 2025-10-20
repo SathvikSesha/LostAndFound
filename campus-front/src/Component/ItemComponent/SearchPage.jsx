@@ -168,8 +168,8 @@ const SearchPage = () => {
 
       {!loading && debouncedQuery && noResults && (
         <div className="text-center py-5">
-          <FaRegSadTear size={50} className="text-muted mb-3" />
-          <h6 className="fw-semibold text-secondary mb-2">No items found</h6>
+          <FaRegSadTear size={50} className="text-success mb-3" />
+          <p className="fw-semibold text-secondary mb-2 fs-5">No items found</p>
           <p className="text-muted small">
             Try different keywords or check both Lost/Found.
           </p>
