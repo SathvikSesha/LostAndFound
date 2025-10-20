@@ -11,9 +11,12 @@ export const validateUser = (userId, password) => {
 export const getUserDetails = () => {
   return axios.get(LOGIN_URL);
 };
+
 export const getAllStudents = () => {
   return axios.get(STUD_URL);
 };
+
+export const getTotalStudents = () => axios.get(STUD_URL + "/count");
 export const deleteStudentByUsername = (username) => {
   return axios.delete(`${STUD_URL}/${username}`);
 };

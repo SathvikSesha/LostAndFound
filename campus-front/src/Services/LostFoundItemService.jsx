@@ -29,3 +29,8 @@ export const foundItemSubmission = (foundItem) =>
 
 export const deleteFoundItemById = (id) =>
   axios.delete(`${BASE_URL}/found-items/${id}`);
+
+export const findAllItems = () => axios.get(`${BASE_URL}/lost-items/count`);
+
+export const getTotalFoundItem = () =>
+  axios.get(`${BASE_URL}/found-items/count`);
