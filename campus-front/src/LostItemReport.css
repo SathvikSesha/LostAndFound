@@ -4,9 +4,10 @@
   align-items: center;
   padding: 40px 20px;
   background-image: linear-gradient(
-    rgba(237, 233, 252, 0.637),
+    145deg,
+    rgba(247, 252, 233, 0.637),
     rgba(181, 214, 245, 0.637),
-    rgba(133, 188, 243, 0.637)
+    rgba(133, 221, 243, 0.637)
   );
   min-height: 100vh;
   font-family: "Poppins", sans-serif;
@@ -41,10 +42,9 @@
 
 /* Card Styling */
 .lost-item-card-glow {
-  background: rgb(244, 249, 249);
+  background: rgba(244, 249, 249, 0.8);
   border-radius: 16px;
-  padding: 25px;
-  padding-left: 35px;
+  padding: 25px 25px 25px 35px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border: 1px solid #e5e7eb;
@@ -61,6 +61,7 @@
   color: #1d1dc0;
   font-weight: 700;
   margin-bottom: 5px;
+  font-size: 22px;
 }
 
 .item-id {

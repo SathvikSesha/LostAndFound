@@ -27,6 +27,10 @@ const StudentMenu = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
+            <NavDropdown title="Search" className="nav-item">
+              <NavDropdown.Item href="/search">Search Item</NavDropdown.Item>
+            </NavDropdown>
+
             <NavDropdown title="Lost Items" className="nav-item">
               <NavDropdown.Item as={Link} to="/LostSubmit">
                 Lost Item Registration

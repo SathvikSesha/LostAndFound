@@ -73,27 +73,20 @@ const AdminMenu = () => {
             </NavDropdown.Item>
           </NavDropdown>
 
+          <NavDropdown title="Search" className="nav-item">
+            <NavDropdown.Item href="/search">Search Item</NavDropdown.Item>
+          </NavDropdown>
+
           <NavDropdown title="Lost Items" className="nav-item">
             <NavDropdown.Item href="/lostReport">
               Lost Item List
             </NavDropdown.Item>
-            <NavDropdown.Item>Lost Item Track</NavDropdown.Item>
           </NavDropdown>
 
           <NavDropdown title="Found Items" className="nav-item">
             <NavDropdown.Item href="/foundReport">
               Found Item List
             </NavDropdown.Item>
-          </NavDropdown>
-
-          <NavDropdown title="Reports" className="nav-item">
-            <NavDropdown.Item href="/foundReport">
-              Found Item Report
-            </NavDropdown.Item>
-            <NavDropdown.Item href="/lostReport">
-              Lost Item Report
-            </NavDropdown.Item>
-            <NavDropdown.Item>Lost Found Analysis</NavDropdown.Item>
           </NavDropdown>
 
           <Nav.Link href="/" className="logout-btn">
