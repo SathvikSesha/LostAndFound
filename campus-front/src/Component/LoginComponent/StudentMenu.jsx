@@ -45,15 +45,6 @@ const StudentMenu = () => {
               </NavDropdown.Item>
             </NavDropdown>
 
-            <NavDropdown title="Reports" className="nav-item">
-              <NavDropdown.Item as={Link} to="/FoundReport">
-                Found Item List
-              </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/LostReport">
-                Lost Item List
-              </NavDropdown.Item>
-            </NavDropdown>
-
             <Nav.Link as={Link} to="/" className="logout-btn">
               <FaSignOutAlt className="me-1" /> Logout
             </Nav.Link>

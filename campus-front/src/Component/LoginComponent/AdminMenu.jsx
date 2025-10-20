@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import {
   FaUsers,
@@ -8,9 +8,56 @@ import {
   FaSignOutAlt,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
+import {
+  findAllItems,
+  getTotalFoundItem,
+} from "../../Services/LostFoundItemService";
+import { getTotalStudents } from "../../Services/LoginService";
 import "../../Dashboard.css";
 
 const AdminMenu = () => {
+  const [lostCount, setLostCount] = useState(0);
+  const [foundCount, setFoundCount] = useState(0);
+  const [studentCount, setStudentCount] = useState(0);
+
+  useEffect(() => {
+    const fetchStudentsCount = async () => {
+      try {
+        const response = await getTotalStudents();
+        setStudentCount(response.data);
+      } catch (error) {
+        console.error("Error fectching Students count:", error);
+      }
+    };
+    fetchStudentsCount();
+  }, []);
+
+  useEffect(() => {
+    const fetchLostItems = async () => {
+      try {
+        const response = await findAllItems();
+        setLostCount(response.data);
+      } catch (error) {
+        console.error("Error fetching lost items:", error);
+      }
+    };
+
+    fetchLostItems();
+  }, []);
+
+  useEffect(() => {
+    const fetchFoundItems = async () => {
+      try {
+        const response = await getTotalFoundItem();
+        setFoundCount(response.data);
+      } catch (error) {
+        console.error("Error fetching lost items:", error);
+      }
+    };
+
+    fetchFoundItems();
+  }, []);
+
   return (
     <div className="dashboard-container">
       {/* Navbar */}
@@ -65,7 +112,7 @@ const AdminMenu = () => {
         >
           <FaUsers className="card-icon" />
           <h4>Total Students</h4>
-          <p>1247</p>
+          <p>{studentCount}</p>
         </motion.div>
 
         <motion.div
@@ -77,7 +124,7 @@ const AdminMenu = () => {
         >
           <FaSearch className="card-icon" />
           <h4>Lost Items</h4>
-          <p>48</p>
+          <p>{lostCount}</p>
         </motion.div>
 
         <motion.div
@@ -89,7 +136,7 @@ const AdminMenu = () => {
         >
           <FaBoxOpen className="card-icon" />
           <h4>Found Items</h4>
-          <p>38</p>
+          <p>{foundCount}</p>
         </motion.div>
       </div>
 

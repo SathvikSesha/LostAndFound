@@ -6,6 +6,12 @@ import {
 import "../../DeleteStudent.css";
 import { Modal, Button, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import {
+  FaTrashAlt,
+  FaUserGraduate,
+  FaEnvelope,
+  FaIdBadge,
+} from "react-icons/fa";
 
 const DeleteStudent = () => {
   const [students, setStudents] = useState([]);
@@ -58,73 +64,63 @@ const DeleteStudent = () => {
   };
 
   return (
-    <div className="delete-student-page d-flex justify-content-center align-items-center py-5">
-      <div className="card modern-card shadow-lg p-4 animate-fade-in w-75">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-          <h3 className="fw-bold text-primary m-0">🧑‍🎓 Manage Students</h3>
-          <button
-            onClick={handleReturn}
-            className="btn btn-outline-secondary rounded-pill px-4 fw-semibold return-btn"
-          >
-            ← Return
-          </button>
-        </div>
-
-        {error && (
-          <div className="alert alert-danger text-center py-2 small">
-            {error}
-          </div>
-        )}
-
-        {loading ? (
-          <div className="text-center mt-4">
-            <Spinner animation="border" variant="primary" />
-            <p className="mt-2 text-muted small">Loading students...</p>
-          </div>
-        ) : (
-          <div className="table-responsive">
-            <table className="table table-hover text-center align-middle">
-              <thead className="table-primary">
-                <tr>
-                  <th>Username</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Role</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {students.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="text-muted">
-                      No students found.
-                    </td>
-                  </tr>
-                ) : (
-                  students.map((s) => (
-                    <tr key={s.username} className="table-row-hover">
-                      <td>{s.username}</td>
-                      <td>{s.personName}</td>
-                      <td>{s.email}</td>
-                      <td>{s.role}</td>
-                      <td>
-                        <button
-                          className="btn btn-outline-danger btn-sm px-3 delete-btn"
-                          onClick={() => confirmDelete(s)}
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
+    <div className="delete-student-container py-5">
+      <div className="header-section text-center mb-4">
+        <FaUserGraduate size={40} className="text-primary mb-2" />
+        <h3 className="fw-bold text-primary header-title">Remove Students</h3>
+        <p className="text-secondary small header-subtitle">
+          Manage and remove student accounts from the system.
+        </p>
       </div>
 
-      {/* Delete Confirmation Modal */}
+      {error && (
+        <div className="alert alert-danger text-center py-2 small">{error}</div>
+      )}
+
+      {loading ? (
+        <div className="text-center mt-5">
+          <Spinner animation="border" variant="primary" />
+          <p className="mt-2 text-muted small">Loading students...</p>
+        </div>
+      ) : students.length === 0 ? (
+        <p className="text-center text-muted mt-4">No students found.</p>
+      ) : (
+        <div className="student-grid-container">
+          {students.map((s) => (
+            <div key={s.username} className="student-card fade-in">
+              <div className="student-card-content">
+                <h6 className="fw-semibold text-primary">{s.personName}</h6>
+                <p className="small text-muted mb-1">
+                  <FaIdBadge className="icon" /> {s.username}
+                </p>
+                <p className="small mb-1">
+                  <FaEnvelope className="icon" /> {s.email}
+                </p>
+                <span className="badge bg-info text-dark">{s.role}</span>
+              </div>
+
+              <button
+                className="btn btn-outline-danger btn-xs mt-2 delete-btn-small"
+                onClick={() => confirmDelete(s)}
+              >
+                <FaTrashAlt className="me-2" />
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="text-center mt-4">
+        <button
+          onClick={handleReturn}
+          className="btn btn-secondary fw-semibold rounded-pill px-3 py-1 return-btn-small"
+        >
+          ← Return
+        </button>
+      </div>
+
+      {/* Modal */}
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}
@@ -133,7 +129,9 @@ const DeleteStudent = () => {
         className="fade-modal"
       >
         <Modal.Header closeButton>
-          <Modal.Title className="text-danger">Confirm Deletion</Modal.Title>
+          <Modal.Title className="text-danger fw-bold">
+            Confirm Deletion
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedStudent && (
