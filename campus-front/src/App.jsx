@@ -12,6 +12,7 @@ import StudentList from "./Component/LoginComponent/StudentList";
 import FoundItemRedirected from "./Component/ItemComponent/FoundItemRedirected";
 import Personal from "./Component/LoginComponent/Personal";
 import DeleteStudent from "./Component/LoginComponent/DeleteStudent";
+import SearchPage from "./Component/ItemComponent/SearchPage";
 import "./App.css";
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
             />
             <Route path="/Personal" element={<Personal />} />
             <Route path="/DeleteStudent" element={<DeleteStudent />} />
+
+            <Route path="/search" element={<SearchPage />} />
           </Routes>
         </BrowserRouter>
       </div>
