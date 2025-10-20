@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaBoxOpen } from "react-icons/fa";
 import { lostItemSubmission } from "../../Services/LostFoundItemService";
 import { getUserDetails } from "../../Services/LoginService";
-import "../../LostItemReport.css";
+import "../../LostItemSubmit.css";
 
 const LostItemSubmit = () => {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ const LostItemSubmit = () => {
     brand: "",
     location: "",
     lostDate: "",
+    status: false,
   });
 
   const today = new Date().toISOString().slice(0, 10);
@@ -90,14 +91,12 @@ const LostItemSubmit = () => {
     navigate(campusUser?.role === "Admin" ? "/AdminMenu" : "/StudentMenu");
 
   return (
-    <div className="lost-item-page d-flex justify-content-center align-items-start py-5">
+    <div className="lost-item-page py-5">
       <div className="card shadow-sm p-4 lost-item-card w-75">
         <div className="text-center mb-4">
           <FaBoxOpen size={40} className="text-primary mb-2" />
           <h4 className="fw-semibold text-primary">Lost Item Submission</h4>
-          <p className="text-secondary small">
-            Report an item you have lost on campus.
-          </p>
+          <p className="text-sec">Report an item you have lost on campus</p>
         </div>
 
         <form onSubmit={validateAndSubmit}>

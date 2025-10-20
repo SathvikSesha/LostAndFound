@@ -23,6 +23,7 @@ const FoundItemSubmit = () => {
     brand: "",
     location: "",
     foundDate: "",
+    status: false,
   });
 
   useEffect(() => {
@@ -91,14 +92,12 @@ const FoundItemSubmit = () => {
     navigate(campusUser?.role === "Admin" ? "/AdminMenu" : "/StudentMenu");
 
   return (
-    <div className="lost-item-page d-flex justify-content-center align-items-start py-5">
+    <div className="lost-item-page py-5">
       <div className="card shadow-sm p-4 lost-item-card w-75">
         <div className="text-center mb-4">
           <FaBox size={40} className="text-primary mb-2" />
           <h4 className="fw-semibold text-primary">Found Item Submission</h4>
-          <p className="text-secondary small">
-            Report an item you have found on campus.
-          </p>
+          <p className="text-sec">Report an item you have found on campus.</p>
         </div>
 
         <form onSubmit={validateAndSubmit}>

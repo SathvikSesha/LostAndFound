@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaBox } from "react-icons/fa6";
 import {
   getAllFoundItems,
   getFoundItemsByUser,
 } from "../../Services/LostFoundItemService";
 import { getUserDetails } from "../../Services/LoginService";
+import {
+  FaBoxOpen,
+  FaMapMarkerAlt,
+  FaCalendarAlt,
+  FaUser,
+  FaTag,
+  FaPalette,
+  FaEnvelope,
+} from "react-icons/fa";
 import "../../LostItemReport.css";
 
 const FoundItemReport = () => {
-  const navigate = useNavigate();
   const [itemList, setItemList] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserDetails()
@@ -47,74 +55,76 @@ const FoundItemReport = () => {
 
   const pageTitle =
     currentUser?.role === "Admin"
-      ? "Found Item Report"
-      : "My Found Items Report";
+      ? "📦 Found Items Report"
+      : "📦 My Found Items";
+
   const pageDescription =
     currentUser?.role === "Admin"
       ? "All items that have been reported as found."
-      : "Items you reported as found.";
+      : "Items you have reported as found.";
 
   return (
-    <div className="lost-item-page d-flex justify-content-center align-items-start py-5">
-      <div className="card shadow-sm p-4 lost-item-card w-75">
-        <div className="text-center mb-4">
-          <FaBox size={40} className="text-primary mb-2" />
-          <h4 className="fw-semibold text-primary">{pageTitle}</h4>
-          <p className="text-secondary small">{pageDescription}</p>
-        </div>
+    <div className="lost-item-page">
+      <div className="lost-item-header">
+        <FaBoxOpen size={40} className="text-success mb-2" />
+        <h2 className="fw-bold text-success">{pageTitle}</h2>
+        <p className="text-secondary">{pageDescription}</p>
+      </div>
 
-        {itemList.length === 0 ? (
-          <div className="text-center py-5">
-            <h6 className="fw-semibold text-secondary mb-2">
-              No Found Items Available
-            </h6>
-            <p className="text-muted small">
-              There are currently no items marked as found.
-            </p>
-          </div>
-        ) : (
-          <div className="table-responsive">
-            <table className="table table-sm table-striped table-hover align-middle text-center">
-              <thead className="table-primary small">
-                <tr>
-                  <th>Item ID</th>
-                  <th>Item Name</th>
-                  <th>Category</th>
-                  <th>Color</th>
-                  <th>Brand</th>
-                  <th>Location</th>
-                  <th>Found Date</th>
-                  <th>Reported By</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                {itemList.map((item) => (
-                  <tr key={item.foundItemId}>
-                    <td>{item.foundItemId}</td>
-                    <td>{item.itemName}</td>
-                    <td>{item.category}</td>
-                    <td>{item.color}</td>
-                    <td>{item.brand}</td>
-                    <td>{item.location}</td>
-                    <td>{item.foundDate}</td>
-                    <td>{item.username}</td>
-                    <td>{item.userEmail}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-        <div className="text-end mt-4">
-          <button
-            onClick={returnBack}
-            className="btn btn-primary btn-sm fw-semibold px-3 py-1"
-          >
-            Return
-          </button>
+      {itemList.length === 0 ? (
+        <div className="text-center py-5">
+          <FaBoxOpen size={50} className="text-muted mb-3" />
+          <h6 className="fw-semibold text-secondary mb-2">
+            No Found Items Available
+          </h6>
+          <p className="text-muted small">
+            There are currently no items marked as found.
+          </p>
         </div>
+      ) : (
+        <div className="lost-item-grid">
+          {itemList.map((item) => (
+            <div key={item.foundItemId} className="lost-item-card-glow">
+              <h4 className="item-title">{item.itemName}</h4>
+              <p className="item-id">#{item.foundItemId}</p>
+
+              <div className="item-tags">
+                <span className="tag category">
+                  <FaTag /> {item.category}
+                </span>
+                <span className="tag color">
+                  <FaPalette /> {item.color}
+                </span>
+              </div>
+
+              <p>
+                <FaMapMarkerAlt className="icon" /> <strong>Found at:</strong>{" "}
+                {item.location}
+              </p>
+              <p>
+                <FaCalendarAlt className="icon" /> <strong>Found on:</strong>{" "}
+                {item.foundDate}
+              </p>
+              <p>
+                <FaUser className="icon" /> <strong>Reported by:</strong>{" "}
+                {item.username}
+              </p>
+              <p>
+                <FaEnvelope className="icon" /> <strong>Email:</strong>{" "}
+                {item.userEmail}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="text-end mt-4">
+        <button
+          onClick={returnBack}
+          className="btn btn-success btn-sm fw-semibold px-3 py-1"
+        >
+          RETURN
+        </button>
       </div>
     </div>
   );
