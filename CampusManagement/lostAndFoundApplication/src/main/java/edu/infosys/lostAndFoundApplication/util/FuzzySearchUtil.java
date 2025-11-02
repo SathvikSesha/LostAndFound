@@ -24,25 +24,19 @@ public class FuzzySearchUtil {
 
         if (f.isEmpty() || q.isEmpty()) return false;
 
-        // direct contains (fast, covers "ele" -> "electronics")
         if (f.contains(q)) return true;
-
-        // tokenized checks: e.g., "red sony phone" -> tokens "red", "sony", "phone"
         String[] tokens = f.split("\\s+|[_\\-.,/]");
 
         for (String token : tokens) {
-            if (token.startsWith(q)) return true; // prefix typed tokens
-
-            // Jaro-Winkler similarity (good for short tokens/typos)
+            if (token.startsWith(q)) return true;
             Double jaroScore = JARO.apply(token, q);
             if (jaroScore != null && jaroScore >= threshold) return true;
 
-            // normalized Levenshtein similarity:
             Integer dist = LEV.apply(token, q);
             if (dist != null) {
                 int maxLen = Math.max(token.length(), q.length());
                 if (maxLen > 0) {
-                    double levSim = 1.0 - ((double) dist / maxLen); // 1.0 = exact match
+                    double levSim = 1.0 - ((double) dist / maxLen);
                     if (levSim >= threshold) return true;
                 }
             }
@@ -51,7 +45,6 @@ public class FuzzySearchUtil {
         return false;
     }
 
-    // overloaded convenience with default threshold 0.72
     public static boolean isFuzzyMatch(String field, String query) {
         return isFuzzyMatch(field, query, 0.72);
     }
