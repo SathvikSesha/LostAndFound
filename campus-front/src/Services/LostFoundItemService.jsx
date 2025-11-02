@@ -1,36 +1,37 @@
-import axios from "axios";
+// src/Services/LostFoundService.js
+import instance from "./axiosConfig";
 
-const BASE_URL = "http://localhost:9999/lost-found";
+const BASE_URL = "/lost-found";
 
-export const getAllLostItems = () => axios.get(`${BASE_URL}/lost-items`);
+export const getAllLostItems = () => instance.get(`${BASE_URL}/lost-items`);
 
 export const getLostItemsByUser = () =>
-  axios.get(`${BASE_URL}/lost-items/user`);
+  instance.get(`${BASE_URL}/lost-items/user`);
 
 export const getLostItemById = (id) =>
-  axios.get(`${BASE_URL}/lost-items/${id}`);
+  instance.get(`${BASE_URL}/lost-items/${id}`);
 
 export const lostItemSubmission = (lostItem) =>
-  axios.post(`${BASE_URL}/lost-items`, lostItem);
+  instance.post(`${BASE_URL}/lost-items`, lostItem);
 
 export const deleteLostItemById = (id) =>
-  axios.delete(`${BASE_URL}/lost-items/${id}`);
+  instance.delete(`${BASE_URL}/lost-items/${id}`);
 
-export const getAllFoundItems = () => axios.get(`${BASE_URL}/found-items`);
+export const getAllFoundItems = () => instance.get(`${BASE_URL}/found-items`);
 
 export const getFoundItemsByUser = () =>
-  axios.get(`${BASE_URL}/found-items/user`);
+  instance.get(`${BASE_URL}/found-items/user`);
 
 export const getFoundItemById = (id) =>
-  axios.get(`${BASE_URL}/found-items/${id}`);
+  instance.get(`${BASE_URL}/found-items/${id}`);
 
 export const foundItemSubmission = (foundItem) =>
-  axios.post(`${BASE_URL}/found-items`, foundItem);
+  instance.post(`${BASE_URL}/found-items`, foundItem);
 
 export const deleteFoundItemById = (id) =>
-  axios.delete(`${BASE_URL}/found-items/${id}`);
+  instance.delete(`${BASE_URL}/found-items/${id}`);
 
-export const findAllItems = () => axios.get(`${BASE_URL}/lost-items/count`);
+export const findAllItems = () => instance.get(`${BASE_URL}/lost-items/count`);
 
 export const getTotalFoundItem = () =>
-  axios.get(`${BASE_URL}/found-items/count`);
+  instance.get(`${BASE_URL}/found-items/count`);

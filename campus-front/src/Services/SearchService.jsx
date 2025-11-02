@@ -1,12 +1,10 @@
-import axios from "axios";
+// src/Services/SearchService.js
+import instance from "./axiosConfig";
 
-const BASE_URL = "http://localhost:9999";
-const SEARCH_BASE = `${BASE_URL}/lost-found/api/search`;
+const SEARCH_BASE = "/lost-found/api/search";
 
-export const searchLostItems = (query) => {
-  return axios.get(`${SEARCH_BASE}/lost`, { params: { q: query } });
-};
+export const searchLostItems = (query) =>
+  instance.get(`${SEARCH_BASE}/lost`, { params: { q: query } });
 
-export const searchFoundItems = (query) => {
-  return axios.get(`${SEARCH_BASE}/found`, { params: { q: query } });
-};
+export const searchFoundItems = (query) =>
+  instance.get(`${SEARCH_BASE}/found`, { params: { q: query } });
