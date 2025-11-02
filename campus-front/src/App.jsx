@@ -13,6 +13,8 @@ import FoundItemRedirected from "./Component/ItemComponent/FoundItemRedirected";
 import Personal from "./Component/LoginComponent/Personal";
 import DeleteStudent from "./Component/LoginComponent/DeleteStudent";
 import SearchPage from "./Component/ItemComponent/SearchPage";
+import LandingPage from "./Component/LoginComponent/LandingPage";
+import FloatingChat from "./Component/ChatComponent/FloatingChat";
 import "./App.css";
 
 function App() {
@@ -21,7 +23,8 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LoginPage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/Register" element={<RegisterUser />} />
 
             <Route path="/AdminMenu" element={<AdminMenu />} />
@@ -43,6 +46,7 @@ function App() {
 
             <Route path="/search" element={<SearchPage />} />
           </Routes>
+          <FloatingChat />
         </BrowserRouter>
       </div>
     </>

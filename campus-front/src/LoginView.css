@@ -1,39 +1,137 @@
+:root {
+  --accent: #ffc107;
+  --muted: #cfd8dc;
+  --glass: rgba(255, 255, 255, 0.06);
+  --card-bg: rgba(255, 255, 255, 0.06);
+  --text-soft: rgba(255, 255, 255, 0.87);
+}
+
+/* Base Container */
 .loginpage,
 .registerUser {
   position: relative;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 0;
+  overflow-x: hidden;
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--text-soft);
   min-height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(180deg, #081229 0%, #071226 55%, #04121a 100%);
+  z-index: 1;
+}
+
+.home-link {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  color: var(--text-soft);
+  font-weight: 500;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 5;
+}
+
+.home-link:hover {
+  background: rgba(255, 255, 255, 0.059);
+  transform: translateX(-4px);
+}
+
+/* background floating shapes */
+.bg-shapes {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
   overflow: hidden;
 }
-
-/* Background Video */
-.background-video {
-  position: fixed; /* fixed so it stays as background */
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover; /* maintain aspect, cover area */
-  z-index: -2; /* push behind everything */
-  filter: brightness(2.5); /* darken slightly */
+.shape {
+  position: absolute;
+  filter: blur(30px) saturate(140%);
+  opacity: 0.2;
+  transform: translateZ(0);
+  border-radius: 36%;
+  mix-blend-mode: screen;
+}
+.shape-1 {
+  width: 258px !important;
+  height: 210px !important;
+  background: linear-gradient(135deg, #ff6b6b, #ff9a9e);
+  top: 10% !important;
+  left: 0%;
+  animation: float3 10s ease-in-out infinite !important;
+}
+.shape-2 {
+  width: 250px !important;
+  height: 240px !important;
+  background: linear-gradient(135deg, #6b8bffac, #9ab0ff);
+  top: 10%;
+  right: -8%;
+  animation: float1 10s ease-in-out infinite !important;
+}
+.shape-3 {
+  width: 272px;
+  height: 148px;
+  background: linear-gradient(135deg, #089258, #4ae3a5);
+  bottom: 32%;
+  left: 38%;
+}
+.shape-4 {
+  width: 144px;
+  height: 96px;
+  background: linear-gradient(135deg, #ffd57aa8, #ff9f7a);
+  bottom: 6%;
+  right: 5%;
+  animation: float2 10s ease-in-out infinite !important;
 }
 
-/* Dark Overlay above video */
-.loginpage::before,
-.registerUser::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* between video (-2) and form (0/1) */
+@keyframes float3 {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(55px) rotate(6deg) scale(0.9);
+    top: 25%;
+    left: 5%;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes float1 {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-128px) rotate(6deg) scale(0.9);
+    top: 36%;
+    right: 5%;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes float2 {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translateY(-128px) rotate(6deg) scale(1.15);
+    bottom: 4%;
+    right: 15%;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
 }
 
 /* Container */

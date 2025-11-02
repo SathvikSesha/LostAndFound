@@ -13,6 +13,11 @@
   font-family: "Poppins", sans-serif;
 }
 
+.form-control::placeholder {
+  color: #fdc9b3 !important; /* your desired color */
+  opacity: 0.8 !important; /* ensures full opacity */
+}
+
 .text-muted {
   font-size: 24px !important;
 }
