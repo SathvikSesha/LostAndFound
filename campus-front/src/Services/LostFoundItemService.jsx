@@ -35,3 +35,6 @@ export const findAllItems = () => instance.get(`${BASE_URL}/lost-items/count`);
 
 export const getTotalFoundItem = () =>
   instance.get(`${BASE_URL}/found-items/count`);
+
+export const getPotentialMatches = (lostItemId) =>
+  instance.get(`${BASE_URL}/lost-items/${lostItemId}/potential-matches`);
