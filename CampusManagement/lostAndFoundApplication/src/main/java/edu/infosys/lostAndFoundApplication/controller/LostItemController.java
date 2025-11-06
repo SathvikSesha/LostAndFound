@@ -1,5 +1,6 @@
 package edu.infosys.lostAndFoundApplication.controller;
 
+import edu.infosys.lostAndFoundApplication.bean.FoundItem;
 import edu.infosys.lostAndFoundApplication.bean.LostItem;
 import edu.infosys.lostAndFoundApplication.service.CampusUserService;
 import edu.infosys.lostAndFoundApplication.service.LostItemService;
@@ -52,4 +53,10 @@ public class LostItemController {
     public int findAllItems() {
     	return lostItemService.findAllItems();
     }
+    
+    @GetMapping("/{id}/potential-matches")
+    public List<FoundItem> getPotentialMatches(@PathVariable String id) {
+        return lostItemService.getPotentialMatches(id);
+    }
+
 }
