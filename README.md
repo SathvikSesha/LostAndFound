@@ -1,4 +1,4 @@
-# 🎒 Lost & Found Management System
+# Lost & Found Management System
 
 ## 📌 Overview
 The **Lost & Found Management System** is a full-stack web application designed to simplify the process of reporting and retrieving lost or found items within a college campus.  
@@ -13,16 +13,19 @@ It provides a **centralized, secure, and automated platform** that connects stud
 2. **Post Lost/Found Items:**  
    Students can post details such as item name, description, date, location, and image of lost or found items.  
 
-3. **Smart Matching & Search:**  
+3. **Smart Matching & Search (Fuzzy Systems):**  
    The system automatically compares new posts with existing listings to suggest potential matches between lost and found items using keyword-based search.  
 
 4. **Admin Verification:**  
    Admins verify posts to maintain authenticity and ensure that only valid items are listed.  
 
 5. **User Contact:**  
-   Once a potential match is identified, users can connect securely to return the found items.  
+   Once a potential match is identified, users can connect securely to return the found items.
+   
+6. **Broadcast Chat Box (Websocket)**
+   The students can join the chat and post there messages about lost and found items.
 
-6. **Future Flow (Planned):**  
+7. **Future Flow (Planned):**  
    - Email/notification alerts when a match is found  
    - AI-based visual recognition for automatic image-based matching  
    - Mobile app integration for easier access  
@@ -32,7 +35,7 @@ It provides a **centralized, secure, and automated platform** that connects stud
 ## 🏗️ System Architecture
 The system follows a **three-tier architecture**:
 
-### 1. Frontend – React.js  
+### 1. Frontend – React.js 
 - Built using **React** for a dynamic and responsive UI.  
 - Supports form validation, real-time search, and smooth navigation.  
 - Communicates with backend APIs using **Axios** for data exchange.  
@@ -52,8 +55,8 @@ The system follows a **three-tier architecture**:
 ## ⚙️ Tech Stack
 | Layer | Technology | Description |
 |--------|-------------|-------------|
-| **Frontend** | React.js, HTML, CSS, JavaScript | For building responsive UI and handling user interactions |
-| **Backend** | Spring Boot, Java | For business logic and API development |
+| **Frontend** | React.js, CSS, BootStrap| For building responsive UI and handling user interactions |
+| **Backend** | Spring Boot, Java , Spring Security | For business logic and API development |
 | **Database** | MySQL | For storing and managing item and user data |
 | **Communication** | RESTful APIs | To connect frontend and backend |
 | **Version Control** | Git, GitHub | For code management and collaboration |
@@ -62,14 +65,15 @@ The system follows a **three-tier architecture**:
 ---
 
 ## 🚀 Key Features
-- 🧾 Post and Search Lost/Found Items  
-- ⚡ Auto-Matching Engine for Quick Results  
-- 🔐 Authentication and Role-Based Access  
-- 📊 Admin Dashboard for Moderation  
-- 💬 Simple User Interaction Flow  
-- 📱 Responsive UI for All Devices  
+- Post and Search Lost/Found Items  
+- Auto-Matching Engine for Quick Results  
+- Authentication and Role-Based Access  
+- Admin Dashboard for Moderation  
+- Simple User Interaction Flow
+- Broadcast Chat Box 
+- Responsive UI for All Devices  
 
 ---
 
 ## 📸 Implementation Snapshots
-*(Add your images here)*  
+
